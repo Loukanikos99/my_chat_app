@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_chat_app/chat/constants/common_widgets.dart';
-import 'package:my_chat_app/chat/widgets/message_time_stamp_widget.dart';
+import 'package:my_chat_app/chat/widgets/chat_screens_widget/message_time_stamp_widget.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/room_widgets.dart';
 
 class ImageBubbleWidget extends StatelessWidget {

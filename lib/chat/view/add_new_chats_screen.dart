@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
-import 'package:my_chat_app/chat/provider/chat_provider.dart';
-import 'package:my_chat_app/chat/widgets/chat_search_bar_widget.dart';
-import 'package:my_chat_app/chat/widgets/listtiles/list_tile_add_new_screen_widget.dart';
-import 'package:my_chat_app/chat/widgets/listtiles/list_tile_empty_widget.dart';
-import 'package:provider/provider.dart';
+import 'package:my_chat_app/chat/chat_bloc/chat_bloc.dart';
+import 'package:my_chat_app/chat/chat_bloc/chat_event.dart';
+import 'package:my_chat_app/chat/chat_bloc/chat_state.dart';
+import 'package:my_chat_app/chat/widgets/chat_screens_widget/chat_search_bar_widget.dart';
+import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tile_add_new_screen_widget.dart';
+import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tile_empty_widget.dart';
 
 class AddNewChatsScreen extends StatefulWidget {
   const AddNewChatsScreen({super.key});
@@ -17,6 +19,14 @@ class AddNewChatsScreen extends StatefulWidget {
 }
 
 class _AddNewChatsScreenState extends State<AddNewChatsScreen> {
+  @override
+  void initState() {
+    context.read<ChatBloc>().add(
+          const ChatEvent.getUsers(limit: 20),
+        );
+    super.initState();
+  }
+
   final TextEditingController controller = TextEditingController();
 
   Debouncer searchDebouncer =
@@ -27,7 +37,6 @@ class _AddNewChatsScreenState extends State<AddNewChatsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final chatProvider = context.read<ChatProvider>();
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -82,38 +91,49 @@ class _AddNewChatsScreenState extends State<AddNewChatsScreen> {
               },
             ),
             Expanded(
-              child: StreamBuilder<QuerySnapshot>(
-                // En su debido tiempo cambiar el limite para que sea paginado.
-                stream: chatProvider.getUsers('users', 200, _textSearch),
-                builder: (
-                  BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot,
-                ) {
-                  if (snapshot.hasData) {
-                    if ((snapshot.data?.docs.length ?? 0) > 0) {
-                      return ListView.separated(
-                        shrinkWrap: true,
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) =>
-                            ListTileAddNewScreenWidget(
-                          documentSnapshot: snapshot.data?.docs[index],
-                        ),
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const Divider(),
-                      );
-                    } else {
-                      return const Center(
-                        child: Text('No user found...'),
-                      );
-                    }
-                  } else {
-                    return Column(
-                      children: List.generate(
-                        5,
-                        (index) => const ListTileEmptyWidget(),
-                      ),
-                    );
-                  }
+              child: BlocBuilder<ChatBloc, ChatState>(
+                builder: (BuildContext context, state) {
+                  return state.maybeWhen(
+                      usersLoaded: (users) => StreamBuilder<QuerySnapshot>(
+                            // TODO:
+                            // En su debido tiempo cambiar el limite para que sea paginado.
+                            stream: users,
+                            builder: (
+                              BuildContext context,
+                              AsyncSnapshot<QuerySnapshot> snapshot,
+                            ) {
+                              if (snapshot.hasData) {
+                                if ((snapshot.data?.docs.length ?? 0) > 0) {
+                                  return ListView.separated(
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) =>
+                                        ListTileAddNewScreenWidget(
+                                      documentSnapshot:
+                                          snapshot.data?.docs[index],
+                                    ),
+                                    separatorBuilder:
+                                        (BuildContext context, int index) =>
+                                            const Divider(),
+                                  );
+                                } else {
+                                  return const Center(
+                                    child: Text('No user found...'),
+                                  );
+                                }
+                              } else {
+                                return Column(
+                                  children: List.generate(
+                                    5,
+                                    (index) => const ListTileEmptyWidget(),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                      orElse: () {
+                        return Container();
+                      });
                 },
               ),
             ),

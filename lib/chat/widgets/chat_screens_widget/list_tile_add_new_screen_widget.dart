@@ -1,11 +1,12 @@
+import 'package:chat_app_client/chat_app_client.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:my_chat_app/chat/provider/chat_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
 import 'package:my_chat_app/chat/view/room_screen.dart';
-import 'package:my_chat_app/chat/widgets/listtiles/list_tile_user_image_widget.dart';
-import 'package:my_chat_app/chat/widgets/listtiles/list_tile_user_name_widget.dart';
-import 'package:my_chat_app/chat/widgets/listtiles/list_tiles.dart';
-import 'package:provider/provider.dart';
+import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tile_user_image_widget.dart';
+import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tile_user_name_widget.dart';
+import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tiles.dart';
 
 class ListTileAddNewScreenWidget extends StatelessWidget {
   const ListTileAddNewScreenWidget({super.key, required this.documentSnapshot});
@@ -21,11 +22,15 @@ class ListTileAddNewScreenWidget extends StatelessWidget {
         Navigator.push<dynamic>(
           context,
           MaterialPageRoute<dynamic>(
-              builder: (context) => ChangeNotifierProvider<ChatProvider>(
-                    create: (context) => ChatProvider(userChat),
-                    child: const RoomScreen(),
-                  ),
-              fullscreenDialog: true),
+            builder: (context) => BlocProvider(
+              create: (context) => RoomBloc(
+                otherUser: userChat,
+                chatAppClient: ChatAppClient(),
+              ),
+              child: const RoomScreen(),
+            ),
+            fullscreenDialog: true,
+          ),
         );
       },
       child: Column(

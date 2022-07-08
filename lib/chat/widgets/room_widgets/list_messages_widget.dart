@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_chat_app/chat/provider/chat_provider.dart';
-import 'package:my_chat_app/chat/widgets/room_widgets/image_bubble_widget.dart';
+import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/room_widgets.dart';
-import 'package:my_chat_app/chat/widgets/room_widgets/text_bubble_widget.dart';
 
 class MessagesListWidget extends StatelessWidget {
   MessagesListWidget(this.index, this.chatMessage);

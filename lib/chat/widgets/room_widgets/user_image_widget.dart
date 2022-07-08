@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/room_widgets.dart';
 
 class UserImageWidget extends StatelessWidget {
   const UserImageWidget({
-    Key? key,
-    required this.chatProvider,
+    super.key,
     this.height = 70,
     this.width = 70,
-  }) : super(key: key);
+  });
 
-  final ChatProvider chatProvider;
   final double height;
   final double width;
 
   @override
   Widget build(BuildContext context) {
+    final otherUser = context.read<RoomBloc>().otherUser;
     return ClipRRect(
       borderRadius: BorderRadius.circular(100),
-      child: chatProvider.otherUser?.picture != null &&
-              chatProvider.otherUser?.picture != ''
+      child: otherUser?.picture != null && otherUser?.picture != ''
           ? Image.network(
-              chatProvider.otherUser!.picture!,
+              otherUser!.picture!,
               height: height,
               width: width,
               fit: BoxFit.cover,
@@ -54,7 +54,7 @@ class UserImageWidget extends StatelessWidget {
                   errorContainerListTile(),
             )
           : SvgPicture.asset(
-              'assets/icons/tabbar/UserCircle.svg',
+              'assets/usercircle.svg',
               height: height,
               width: width,
               fit: BoxFit.cover,

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_chat_app/chat/constants/common_widgets.dart';
-import 'package:my_chat_app/chat/widgets/listtiles/list_tiles.dart';
+import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tiles.dart';
 
 class ListTileUserImageWidget extends StatelessWidget {
   const ListTileUserImageWidget({
-    Key? key,
+    super.key,
     required this.userChat,
-  }) : super(key: key);
+  });
 
   final User userChat;
 
@@ -47,7 +47,7 @@ class ListTileUserImageWidget extends StatelessWidget {
                   errorContainerListTile(),
             )
           : SvgPicture.asset(
-              'assets/icons/tabbar/UserCircle.svg',
+              'assets/usercircle.svg',
               height: 70,
               width: 70,
               fit: BoxFit.cover,

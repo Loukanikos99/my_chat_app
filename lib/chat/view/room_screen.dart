@@ -2,11 +2,13 @@ import 'package:chat_app_client/constants/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
-import 'package:my_chat_app/chat/provider/chat_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
+import 'package:my_chat_app/chat/room_bloc/room_event.dart';
+import 'package:my_chat_app/chat/room_bloc/room_state.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/body_room_screen_widget.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/message_input_widget.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/user_image_widget.dart';
-import 'package:provider/provider.dart';
 
 class RoomScreen extends StatefulWidget {
   const RoomScreen({super.key});
@@ -22,14 +24,11 @@ class _RoomScreenState extends State<RoomScreen> {
 
   final FocusNode focusNode = FocusNode();
 
-  late ChatProvider chatProvider;
-
   @override
   void initState() {
+    context.read<RoomBloc>().add(const RoomEvent.getChatMessage(limit: 20));
     super.initState();
-    chatProvider = context.read<ChatProvider>();
     focusNode.addListener(onFocusChanged);
-    chatProvider.readLocal();
   }
 
   void onFocusChanged() {
@@ -53,11 +52,15 @@ class _RoomScreenState extends State<RoomScreen> {
         isShowSticker = false;
       });
     } else {
-      chatProvider.updateFirestoreData(
-        FirestoreConstants.pathUserCollection,
-        currentUserId!,
-        <String, dynamic>{FirestoreConstants.chattingWith: null},
-      );
+      context.read<RoomBloc>().add(
+            RoomUpdateFirebaseDataEvent(
+              collectionPath: FirestoreConstants.pathUserCollection,
+              docPath: currentUserId!,
+              dataUpdate: <String, dynamic>{
+                FirestoreConstants.chattingWith: null
+              },
+            ),
+          );
     }
     return Future.value(false);
   }
@@ -71,9 +74,9 @@ class _RoomScreenState extends State<RoomScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            UserImageWidget(chatProvider: chatProvider, height: 40, width: 40),
+            const UserImageWidget(height: 40, width: 40),
             const SizedBox(width: 5),
-            Text(chatProvider.otherUser?.name?.trim() ?? ''),
+            Text(context.read<RoomBloc>().otherUser?.name ?? 'Anonimous'),
             const SizedBox(width: 25),
           ],
         ),
@@ -87,7 +90,6 @@ class _RoomScreenState extends State<RoomScreen> {
               const SizedBox(height: 20, child: ViewLastMessageWidget()),
               MessageInputWidget(
                 focusNode: focusNode,
-                controller: chatProvider.textEditingController,
               ),
             ],
           ),
@@ -104,22 +106,33 @@ class ViewLastMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: context.read<ChatProvider>().getChatMessage(1),
-      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasData) {
-          final listMessages = snapshot.data!.docs;
-          if (listMessages.isNotEmpty) {
-            return SizedBox(
-              height: 20,
-              child: Text(listMessages.last['isRead'] == true ? 'Leído' : ''),
-            );
-          } else {
-            return const SizedBox.shrink();
-          }
-        } else {
-          return const SizedBox.shrink();
-        }
+    return BlocBuilder<RoomBloc, RoomState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          messagesloaded: (messagges) => StreamBuilder(
+            stream: messagges,
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasData) {
+                final listMessages = snapshot.data!.docs;
+                if (listMessages.isNotEmpty) {
+                  return SizedBox(
+                    height: 20,
+                    child: Text(
+                      listMessages.last['isRead'] == true ? 'Leído' : '',
+                    ),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
+          ),
+          orElse: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
       },
     );
   }

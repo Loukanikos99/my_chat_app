@@ -72,7 +72,8 @@ class ChatAppClient with ChatAppClientBase {
   }
 
   /// Registrar un usuario en la base de datos de firestore
-  /// Tener en cuenta que este metodo tambien registra al usuario en el Authentication de Firebase
+  /// Tener en cuenta que este metodo tambien registra al
+  /// usuario en el Authentication de Firebase
   Future<User?> registerFirebase({
     required String name,
     required String email,

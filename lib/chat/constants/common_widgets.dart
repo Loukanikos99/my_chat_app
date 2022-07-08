@@ -5,7 +5,7 @@ Widget errorContainer() {
   return Container(
     clipBehavior: Clip.hardEdge,
     child: SvgPicture.asset(
-      'assets/icons/tabbar/UserCircle.svg',
+      'assets/usercircle.svg',
       height: 200,
       width: 200,
     ),
@@ -14,7 +14,7 @@ Widget errorContainer() {
 
 Widget errorContainerListTile() {
   return SvgPicture.asset(
-    'assets/icons/tabbar/UserCircle.svg',
+    'assets/usercircle.svg',
     height: 70,
     width: 70,
   );

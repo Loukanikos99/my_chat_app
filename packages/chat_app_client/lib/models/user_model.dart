@@ -22,7 +22,7 @@ class User {
 
     try {
       name = snapshot.get('name') as String;
-      picture = snapshot.get('picture') as String;
+      picture = snapshot.get('picture') as String?;
     } catch (e) {}
     return User(
       id: snapshot.id,

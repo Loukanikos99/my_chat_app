@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
+import 'package:my_chat_app/chat/room_bloc/room_event.dart';
+import 'package:my_chat_app/chat/room_bloc/room_state.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/room_widgets.dart';
-import 'package:provider/provider.dart';
 
 class BodyRoomScreenWidget extends StatefulWidget {
   const BodyRoomScreenWidget({super.key});
@@ -41,83 +44,84 @@ class _BodyRoomScreenWidgetState extends State<BodyRoomScreenWidget> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return Consumer<ChatProvider>(
-      builder: (context, chatProvider, _) => Container(
-        height: screenSize.height * 0.78,
-        width: screenSize.width,
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: chatProvider.groupChatId.isNotEmpty
-            ? StreamBuilder<QuerySnapshot>(
-                stream: chatProvider.getChatMessage(_limit),
-                builder: (
-                  BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot,
-                ) {
-                  if (snapshot.hasData) {
-                    listMessages = snapshot.data!.docs;
+    return Container(
+      height: screenSize.height * 0.78,
+      width: screenSize.width,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: BlocBuilder<RoomBloc, RoomState>(
+        builder: (BuildContext context, state) {
+          return state.maybeWhen(
+              messagesloaded: (messages) => StreamBuilder<QuerySnapshot>(
+                    stream: messages,
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot,
+                    ) {
+                      if (snapshot.hasData) {
+                        listMessages = snapshot.data!.docs;
 
-                    if (listMessages.isNotEmpty) {
-                      if (listMessages.first['idTo'] ==
-                          chatProvider.currentUserId) {
-                        chatProvider.updateUnreadMessage(
-                          listMessages.first.id,
-                          listMessages.first,
+                        if (listMessages.isNotEmpty) {
+                          if (listMessages.first['idTo'] ==
+                              context.read<RoomBloc>().currentUserId) {
+                            context
+                                .read<RoomBloc>()
+                                .add(RoomEvent.updateUnreadMessage(
+                                  chatMessage: listMessages.first,
+                                  docPath: listMessages.first.id,
+                                ));
+                          }
+                          return ListView.builder(
+                            padding: const EdgeInsets.all(10),
+                            itemCount: snapshot.data?.docs.length,
+                            controller: controller,
+                            reverse: true,
+                            itemBuilder: (context, index) {
+                              final chatMessages = ChatMessage.fromDocument(
+                                snapshot.data?.docs[index] as DocumentSnapshot,
+                              );
+
+                              final currentMessageTimeStamp =
+                                  DateTime.fromMillisecondsSinceEpoch(
+                                int.parse(chatMessages.timestamp as String),
+                              );
+
+                              final lastMessageTimeStamp = index >= 1
+                                  ? DateTime.fromMillisecondsSinceEpoch(
+                                      int.parse(
+                                        snapshot.data?.docs[index - 1]
+                                            ['timestamp'] as String,
+                                      ),
+                                    )
+                                  : currentMessageTimeStamp;
+
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (currentMessageTimeStamp.day >
+                                      lastMessageTimeStamp.day)
+                                    DayTimeStampWidget(
+                                        chatMessages: chatMessages),
+                                  MessagesListWidget(index, chatMessages),
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          return const Center(
+                            child: Text('Sin mensajes...'),
+                          );
+                        }
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.teal,
+                          ),
                         );
                       }
-                      return ListView.builder(
-                        padding: const EdgeInsets.all(10),
-                        itemCount: snapshot.data?.docs.length,
-                        controller: controller,
-                        reverse: true,
-                        itemBuilder: (context, index) {
-                          final chatMessages = ChatMessage.fromDocument(
-                            snapshot.data?.docs[index] as DocumentSnapshot,
-                          );
-
-                          final currentMessageTimeStamp =
-                              DateTime.fromMillisecondsSinceEpoch(
-                            int.parse(chatMessages.timestamp as String),
-                          );
-
-                          final lastMessageTimeStamp = index >= 1
-                              ? DateTime.fromMillisecondsSinceEpoch(
-                                  int.parse(
-                                    snapshot.data?.docs[index - 1]['timestamp']
-                                        as String,
-                                  ),
-                                )
-                              : currentMessageTimeStamp;
-
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (currentMessageTimeStamp.day >
-                                  lastMessageTimeStamp.day)
-                                DayTimeStampWidget(chatMessages: chatMessages),
-                              MessagesListWidget(index, chatMessages),
-                            ],
-                          );
-                        },
-                      );
-                    } else {
-                      return const Center(
-                        child: Text('Sin mensajes...'),
-                      );
-                    }
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.teal,
-                      ),
-                    );
-                  }
-                },
-              )
-            : const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.teal,
-                ),
-              ),
+                    },
+                  ),
+              orElse: () => Container());
+        },
       ),
     );
   }
