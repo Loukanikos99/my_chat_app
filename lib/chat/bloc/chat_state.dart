@@ -1,6 +1,14 @@
-part of 'chat_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-@immutable
-abstract class ChatState {}
+part 'chat_state.freezed.dart';
 
-class ChatInitial extends ChatState {}
+@freezed
+class ChatState with _$ChatState {
+  const factory ChatState.initial() = ChatStateInitial;
+
+  const factory ChatState.loading() = ChatStateLoading;
+
+  const factory ChatState.success() = ChatStateSuccess;
+
+  const factory ChatState.failed(String errorMsg) = ChatStateFailed;
+}
