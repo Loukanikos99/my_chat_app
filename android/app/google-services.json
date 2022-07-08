@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "910931877857",
+    "project_id": "chat-proyect-dbf0a",
+    "storage_bucket": "chat-proyect-dbf0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910931877857:android:dd31ec4c40c151965c3ca0",
+        "android_client_info": {
+          "package_name": "com.loukanikos.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910931877857-1q7dqurlk2b2ag0nn4nhdlfellls0n1d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFRnWu3Qv9eOvQmwOgnTxppDLQBK9Y7O8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910931877857-1q7dqurlk2b2ag0nn4nhdlfellls0n1d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "910931877857-uu3d3s15teh9pq036caf9es21in7kedm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.loukanikos.chat.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910931877857:android:b4fd888bfedf86095c3ca0",
+        "android_client_info": {
+          "package_name": "com.loukanikos.chat_app.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910931877857-1q7dqurlk2b2ag0nn4nhdlfellls0n1d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFRnWu3Qv9eOvQmwOgnTxppDLQBK9Y7O8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910931877857-1q7dqurlk2b2ag0nn4nhdlfellls0n1d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "910931877857-uu3d3s15teh9pq036caf9es21in7kedm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.loukanikos.chat.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
