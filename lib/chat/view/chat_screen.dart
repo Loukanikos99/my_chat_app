@@ -26,7 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     context.read<ChatBloc>().add(
-          const ChatEvent.getUsersAlreadyInChat(limit: 20),
+          ChatEvent.getUsersAlreadyWithChat(limit: 20, textSearch: _textSearch),
         );
     super.initState();
   }
@@ -101,49 +101,42 @@ class _ChatScreenState extends State<ChatScreen> {
             BlocBuilder<ChatBloc, ChatState>(
               builder: (context, state) {
                 return state.maybeWhen(
-                  orElse: () => Container(),
+                  orElse: Container.new,
                   usersLoaded: (users) => Expanded(
-                    child: context.read<ChatBloc>().currentUserId != null
-                        ? StreamBuilder<QuerySnapshot>(
-                            stream: users,
-                            builder: (
-                              BuildContext context,
-                              AsyncSnapshot<QuerySnapshot> snapshot,
-                            ) {
-                              if (snapshot.hasData) {
-                                if ((snapshot.data?.docs.length ?? 0) > 0) {
-                                  return ListView.separated(
-                                    shrinkWrap: true,
-                                    itemCount: snapshot.data!.docs.length,
-                                    itemBuilder: (context, index) =>
-                                        ListTileChatScreenWidget(
-                                      documentSnapshot:
-                                          snapshot.data?.docs[index],
-                                    ),
-                                    separatorBuilder:
-                                        (BuildContext context, int index) =>
-                                            const Divider(),
-                                  );
-                                } else {
-                                  return const Center(
-                                    child: Text('Comienze un nuevo chat!'),
-                                  );
-                                }
-                              } else {
-                                return Column(
-                                  children: List.generate(
-                                    5,
-                                    (index) => const ListTileEmptyWidget(),
-                                  ),
-                                );
-                              }
-                            },
-                          )
-                        : const Center(
-                            child: Text(
-                              'Debe iniciar sesión para tener acceso al chat.',
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: users,
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot,
+                      ) {
+                        if (snapshot.hasData) {
+                          if ((snapshot.data?.docs.length ?? 0) > 0) {
+                            return ListView.separated(
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.docs.length,
+                              itemBuilder: (context, index) =>
+                                  ListTileChatScreenWidget(
+                                documentSnapshot: snapshot.data?.docs[index],
+                              ),
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                                      const Divider(),
+                            );
+                          } else {
+                            return const Center(
+                              child: Text('Comienze un nuevo chat!'),
+                            );
+                          }
+                        } else {
+                          return Column(
+                            children: List.generate(
+                              5,
+                              (index) => const ListTileEmptyWidget(),
                             ),
-                          ),
+                          );
+                        }
+                      },
+                    ),
                   ),
                 );
               },

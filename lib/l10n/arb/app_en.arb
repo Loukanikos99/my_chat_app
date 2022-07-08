@@ -3,5 +3,19 @@
     "counterAppBarTitle": "Counter",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
-    }
+    },
+    "DontYouHaveAnAccountYet?" : "Don't you have an account yet?",
+    "do you already have an account?" : "do you already have an account?",
+    "login": "Log in",
+    "logout": "Log out",
+    "signinWithGoogle": "Sign in with google",
+    "signin": "Sign in",
+    "register": "Register",
+    "chooseAnImage": "Choose an Image",
+    "fullName": "Full name",
+    "password": "Password",
+    "thisFieldIsRequired":"This field is required",
+    "userNotFound": "User not found",
+    "read": "read"
+
 }

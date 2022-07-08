@@ -7,7 +7,7 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
       {super.key,
       required TextEditingController email,
       required TextEditingController password,
-      required GlobalKey<FormState> formKey})
+      required GlobalKey<FormState> formKey,})
       : _contructor = Contructors.login,
         _formKey = formKey,
         _email = email,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
 import 'package:my_chat_app/chat/room_bloc/room_event.dart';
 import 'package:my_chat_app/chat/room_bloc/room_state.dart';
@@ -11,7 +12,8 @@ class MessageInputWidget extends StatelessWidget {
   });
 
   final FocusNode? focusNode;
-  TextEditingController controller = TextEditingController();
+
+  final TextEditingController controller = TextEditingController();
 
   void _onSubmit(BuildContext context) {
     context.read<RoomBloc>().add(

@@ -76,7 +76,12 @@ class _RoomScreenState extends State<RoomScreen> {
           children: [
             const UserImageWidget(height: 40, width: 40),
             const SizedBox(width: 5),
-            Text(context.read<RoomBloc>().otherUser?.name ?? 'Anonimous'),
+            Text(
+              context.read<RoomBloc>().otherUser?.name ?? 'Anonimous',
+              style: const TextStyle(
+                color: Colors.black,
+              ),
+            ),
             const SizedBox(width: 25),
           ],
         ),

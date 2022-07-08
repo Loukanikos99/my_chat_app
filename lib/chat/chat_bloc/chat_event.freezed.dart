@@ -22,41 +22,41 @@ mixin _$ChatEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int limit, String? textSearch) getUsers,
     required TResult Function(int limit, String? textSearch)
-        getUsersAlreadyInChat,
+        getUsersAlreadyWithChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int limit, String? textSearch)? getUsers,
-    TResult Function(int limit, String? textSearch)? getUsersAlreadyInChat,
+    TResult Function(int limit, String? textSearch)? getUsersAlreadyWithChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int limit, String? textSearch)? getUsers,
-    TResult Function(int limit, String? textSearch)? getUsersAlreadyInChat,
+    TResult Function(int limit, String? textSearch)? getUsersAlreadyWithChat,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ChatGetUsersEvent value) getUsers,
-    required TResult Function(ChatGetUsersAlreadyInChatEvent value)
-        getUsersAlreadyInChat,
+    required TResult Function(ChatGetUsersAlreadyWithChatEvent value)
+        getUsersAlreadyWithChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ChatGetUsersEvent value)? getUsers,
-    TResult Function(ChatGetUsersAlreadyInChatEvent value)?
-        getUsersAlreadyInChat,
+    TResult Function(ChatGetUsersAlreadyWithChatEvent value)?
+        getUsersAlreadyWithChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ChatGetUsersEvent value)? getUsers,
-    TResult Function(ChatGetUsersAlreadyInChatEvent value)?
-        getUsersAlreadyInChat,
+    TResult Function(ChatGetUsersAlreadyWithChatEvent value)?
+        getUsersAlreadyWithChat,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -179,7 +179,7 @@ class _$ChatGetUsersEvent implements ChatGetUsersEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int limit, String? textSearch) getUsers,
     required TResult Function(int limit, String? textSearch)
-        getUsersAlreadyInChat,
+        getUsersAlreadyWithChat,
   }) {
     return getUsers(limit, textSearch);
   }
@@ -188,7 +188,7 @@ class _$ChatGetUsersEvent implements ChatGetUsersEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int limit, String? textSearch)? getUsers,
-    TResult Function(int limit, String? textSearch)? getUsersAlreadyInChat,
+    TResult Function(int limit, String? textSearch)? getUsersAlreadyWithChat,
   }) {
     return getUsers?.call(limit, textSearch);
   }
@@ -197,7 +197,7 @@ class _$ChatGetUsersEvent implements ChatGetUsersEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int limit, String? textSearch)? getUsers,
-    TResult Function(int limit, String? textSearch)? getUsersAlreadyInChat,
+    TResult Function(int limit, String? textSearch)? getUsersAlreadyWithChat,
     required TResult orElse(),
   }) {
     if (getUsers != null) {
@@ -210,8 +210,8 @@ class _$ChatGetUsersEvent implements ChatGetUsersEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ChatGetUsersEvent value) getUsers,
-    required TResult Function(ChatGetUsersAlreadyInChatEvent value)
-        getUsersAlreadyInChat,
+    required TResult Function(ChatGetUsersAlreadyWithChatEvent value)
+        getUsersAlreadyWithChat,
   }) {
     return getUsers(this);
   }
@@ -220,8 +220,8 @@ class _$ChatGetUsersEvent implements ChatGetUsersEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ChatGetUsersEvent value)? getUsers,
-    TResult Function(ChatGetUsersAlreadyInChatEvent value)?
-        getUsersAlreadyInChat,
+    TResult Function(ChatGetUsersAlreadyWithChatEvent value)?
+        getUsersAlreadyWithChat,
   }) {
     return getUsers?.call(this);
   }
@@ -230,8 +230,8 @@ class _$ChatGetUsersEvent implements ChatGetUsersEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ChatGetUsersEvent value)? getUsers,
-    TResult Function(ChatGetUsersAlreadyInChatEvent value)?
-        getUsersAlreadyInChat,
+    TResult Function(ChatGetUsersAlreadyWithChatEvent value)?
+        getUsersAlreadyWithChat,
     required TResult orElse(),
   }) {
     if (getUsers != null) {
@@ -257,35 +257,35 @@ abstract class ChatGetUsersEvent implements ChatEvent {
 }
 
 /// @nodoc
-abstract class _$$ChatGetUsersAlreadyInChatEventCopyWith<$Res>
+abstract class _$$ChatGetUsersAlreadyWithChatEventCopyWith<$Res>
     implements $ChatEventCopyWith<$Res> {
-  factory _$$ChatGetUsersAlreadyInChatEventCopyWith(
-          _$ChatGetUsersAlreadyInChatEvent value,
-          $Res Function(_$ChatGetUsersAlreadyInChatEvent) then) =
-      __$$ChatGetUsersAlreadyInChatEventCopyWithImpl<$Res>;
+  factory _$$ChatGetUsersAlreadyWithChatEventCopyWith(
+          _$ChatGetUsersAlreadyWithChatEvent value,
+          $Res Function(_$ChatGetUsersAlreadyWithChatEvent) then) =
+      __$$ChatGetUsersAlreadyWithChatEventCopyWithImpl<$Res>;
   @override
   $Res call({int limit, String? textSearch});
 }
 
 /// @nodoc
-class __$$ChatGetUsersAlreadyInChatEventCopyWithImpl<$Res>
+class __$$ChatGetUsersAlreadyWithChatEventCopyWithImpl<$Res>
     extends _$ChatEventCopyWithImpl<$Res>
-    implements _$$ChatGetUsersAlreadyInChatEventCopyWith<$Res> {
-  __$$ChatGetUsersAlreadyInChatEventCopyWithImpl(
-      _$ChatGetUsersAlreadyInChatEvent _value,
-      $Res Function(_$ChatGetUsersAlreadyInChatEvent) _then)
-      : super(_value, (v) => _then(v as _$ChatGetUsersAlreadyInChatEvent));
+    implements _$$ChatGetUsersAlreadyWithChatEventCopyWith<$Res> {
+  __$$ChatGetUsersAlreadyWithChatEventCopyWithImpl(
+      _$ChatGetUsersAlreadyWithChatEvent _value,
+      $Res Function(_$ChatGetUsersAlreadyWithChatEvent) _then)
+      : super(_value, (v) => _then(v as _$ChatGetUsersAlreadyWithChatEvent));
 
   @override
-  _$ChatGetUsersAlreadyInChatEvent get _value =>
-      super._value as _$ChatGetUsersAlreadyInChatEvent;
+  _$ChatGetUsersAlreadyWithChatEvent get _value =>
+      super._value as _$ChatGetUsersAlreadyWithChatEvent;
 
   @override
   $Res call({
     Object? limit = freezed,
     Object? textSearch = freezed,
   }) {
-    return _then(_$ChatGetUsersAlreadyInChatEvent(
+    return _then(_$ChatGetUsersAlreadyWithChatEvent(
       limit: limit == freezed
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
@@ -300,9 +300,9 @@ class __$$ChatGetUsersAlreadyInChatEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ChatGetUsersAlreadyInChatEvent
-    implements ChatGetUsersAlreadyInChatEvent {
-  const _$ChatGetUsersAlreadyInChatEvent(
+class _$ChatGetUsersAlreadyWithChatEvent
+    implements ChatGetUsersAlreadyWithChatEvent {
+  const _$ChatGetUsersAlreadyWithChatEvent(
       {required this.limit, this.textSearch});
 
   @override
@@ -312,14 +312,14 @@ class _$ChatGetUsersAlreadyInChatEvent
 
   @override
   String toString() {
-    return 'ChatEvent.getUsersAlreadyInChat(limit: $limit, textSearch: $textSearch)';
+    return 'ChatEvent.getUsersAlreadyWithChat(limit: $limit, textSearch: $textSearch)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChatGetUsersAlreadyInChatEvent &&
+            other is _$ChatGetUsersAlreadyWithChatEvent &&
             const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality()
                 .equals(other.textSearch, textSearch));
@@ -333,38 +333,39 @@ class _$ChatGetUsersAlreadyInChatEvent
 
   @JsonKey(ignore: true)
   @override
-  _$$ChatGetUsersAlreadyInChatEventCopyWith<_$ChatGetUsersAlreadyInChatEvent>
-      get copyWith => __$$ChatGetUsersAlreadyInChatEventCopyWithImpl<
-          _$ChatGetUsersAlreadyInChatEvent>(this, _$identity);
+  _$$ChatGetUsersAlreadyWithChatEventCopyWith<
+          _$ChatGetUsersAlreadyWithChatEvent>
+      get copyWith => __$$ChatGetUsersAlreadyWithChatEventCopyWithImpl<
+          _$ChatGetUsersAlreadyWithChatEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int limit, String? textSearch) getUsers,
     required TResult Function(int limit, String? textSearch)
-        getUsersAlreadyInChat,
+        getUsersAlreadyWithChat,
   }) {
-    return getUsersAlreadyInChat(limit, textSearch);
+    return getUsersAlreadyWithChat(limit, textSearch);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int limit, String? textSearch)? getUsers,
-    TResult Function(int limit, String? textSearch)? getUsersAlreadyInChat,
+    TResult Function(int limit, String? textSearch)? getUsersAlreadyWithChat,
   }) {
-    return getUsersAlreadyInChat?.call(limit, textSearch);
+    return getUsersAlreadyWithChat?.call(limit, textSearch);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int limit, String? textSearch)? getUsers,
-    TResult Function(int limit, String? textSearch)? getUsersAlreadyInChat,
+    TResult Function(int limit, String? textSearch)? getUsersAlreadyWithChat,
     required TResult orElse(),
   }) {
-    if (getUsersAlreadyInChat != null) {
-      return getUsersAlreadyInChat(limit, textSearch);
+    if (getUsersAlreadyWithChat != null) {
+      return getUsersAlreadyWithChat(limit, textSearch);
     }
     return orElse();
   }
@@ -373,41 +374,41 @@ class _$ChatGetUsersAlreadyInChatEvent
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ChatGetUsersEvent value) getUsers,
-    required TResult Function(ChatGetUsersAlreadyInChatEvent value)
-        getUsersAlreadyInChat,
+    required TResult Function(ChatGetUsersAlreadyWithChatEvent value)
+        getUsersAlreadyWithChat,
   }) {
-    return getUsersAlreadyInChat(this);
+    return getUsersAlreadyWithChat(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ChatGetUsersEvent value)? getUsers,
-    TResult Function(ChatGetUsersAlreadyInChatEvent value)?
-        getUsersAlreadyInChat,
+    TResult Function(ChatGetUsersAlreadyWithChatEvent value)?
+        getUsersAlreadyWithChat,
   }) {
-    return getUsersAlreadyInChat?.call(this);
+    return getUsersAlreadyWithChat?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ChatGetUsersEvent value)? getUsers,
-    TResult Function(ChatGetUsersAlreadyInChatEvent value)?
-        getUsersAlreadyInChat,
+    TResult Function(ChatGetUsersAlreadyWithChatEvent value)?
+        getUsersAlreadyWithChat,
     required TResult orElse(),
   }) {
-    if (getUsersAlreadyInChat != null) {
-      return getUsersAlreadyInChat(this);
+    if (getUsersAlreadyWithChat != null) {
+      return getUsersAlreadyWithChat(this);
     }
     return orElse();
   }
 }
 
-abstract class ChatGetUsersAlreadyInChatEvent implements ChatEvent {
-  const factory ChatGetUsersAlreadyInChatEvent(
+abstract class ChatGetUsersAlreadyWithChatEvent implements ChatEvent {
+  const factory ChatGetUsersAlreadyWithChatEvent(
       {required final int limit,
-      final String? textSearch}) = _$ChatGetUsersAlreadyInChatEvent;
+      final String? textSearch}) = _$ChatGetUsersAlreadyWithChatEvent;
 
   @override
   int get limit => throw _privateConstructorUsedError;
@@ -415,6 +416,7 @@ abstract class ChatGetUsersAlreadyInChatEvent implements ChatEvent {
   String? get textSearch => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$ChatGetUsersAlreadyInChatEventCopyWith<_$ChatGetUsersAlreadyInChatEvent>
+  _$$ChatGetUsersAlreadyWithChatEventCopyWith<
+          _$ChatGetUsersAlreadyWithChatEvent>
       get copyWith => throw _privateConstructorUsedError;
 }

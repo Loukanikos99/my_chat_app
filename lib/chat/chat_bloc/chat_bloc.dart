@@ -11,7 +11,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     required this.chatAppClient,
   }) : super(const ChatState.initial()) {
     on<ChatGetUsersEvent>(_onGetUsers);
-    on<ChatGetUsersAlreadyInChatEvent>(_onGetUsersAlreadyInChat);
+    on<ChatGetUsersAlreadyWithChatEvent>(_onGetUsersAlreadyWithChat);
   }
 
   final ChatAppClient chatAppClient;
@@ -31,8 +31,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     emit(ChatState.usersLoaded(users: users));
   }
 
-  Future<void> _onGetUsersAlreadyInChat(
-    ChatGetUsersAlreadyInChatEvent event,
+  Future<void> _onGetUsersAlreadyWithChat(
+    ChatGetUsersAlreadyWithChatEvent event,
     Emitter<ChatState> emit,
   ) async {
     emit(const ChatState.loading());

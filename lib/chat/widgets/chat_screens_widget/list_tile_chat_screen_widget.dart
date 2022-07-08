@@ -2,6 +2,7 @@ import 'package:chat_app_client/chat_app_client.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
 import 'package:my_chat_app/chat/room_bloc/room_state.dart';
 import 'package:my_chat_app/chat/view/room_screen.dart';
@@ -9,20 +10,19 @@ import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tile_user_imag
 import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tile_user_name_widget.dart';
 import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tiles.dart';
 import 'package:my_chat_app/chat/widgets/chat_screens_widget/not_read_messages_widget.dart';
-import 'package:provider/provider.dart';
 
 class ListTileChatScreenWidget extends StatelessWidget {
-  ListTileChatScreenWidget({
+  const ListTileChatScreenWidget({
     super.key,
     this.documentSnapshot,
   });
 
   final DocumentSnapshot? documentSnapshot;
 
-  List<QueryDocumentSnapshot> listMessages = [];
-
   @override
   Widget build(BuildContext context) {
+    var listMessages = <QueryDocumentSnapshot>[];
+
     final userChat = User.fromDocument(documentSnapshot!);
 
     final currentUserId = context.read<RoomBloc>().currentUserId;

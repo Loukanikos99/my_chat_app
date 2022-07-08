@@ -25,8 +25,9 @@ class NotReadMessagesWidget extends StatelessWidget {
                 height: 15,
                 width: 15,
                 decoration: BoxDecoration(
-                    color: Colors.blue[900],
-                    borderRadius: BorderRadius.circular(100)),
+                  color: Colors.blue[900],
+                  borderRadius: BorderRadius.circular(100),
+                ),
               ),
             ],
           )

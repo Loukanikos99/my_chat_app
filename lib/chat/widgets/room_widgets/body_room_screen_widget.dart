@@ -14,7 +14,6 @@ class BodyRoomScreenWidget extends StatefulWidget {
 }
 
 class _BodyRoomScreenWidgetState extends State<BodyRoomScreenWidget> {
-//TODO CAMBIAR EL LIMITE PORQUE SE FRENA EN 20 MENSAJES
   int _limit = 20;
 
   final ScrollController controller = ScrollController();
@@ -29,6 +28,7 @@ class _BodyRoomScreenWidgetState extends State<BodyRoomScreenWidget> {
     if ((controller.position.pixels + 300) >=
         controller.position.maxScrollExtent) {
       _limit = _limit + 20;
+      context.read<RoomBloc>().add(RoomEvent.getChatMessage(limit: _limit));
       setState(() {});
     }
   }

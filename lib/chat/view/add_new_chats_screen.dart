@@ -94,46 +94,46 @@ class _AddNewChatsScreenState extends State<AddNewChatsScreen> {
               child: BlocBuilder<ChatBloc, ChatState>(
                 builder: (BuildContext context, state) {
                   return state.maybeWhen(
-                      usersLoaded: (users) => StreamBuilder<QuerySnapshot>(
-                            // TODO:
-                            // En su debido tiempo cambiar el limite para que sea paginado.
-                            stream: users,
-                            builder: (
-                              BuildContext context,
-                              AsyncSnapshot<QuerySnapshot> snapshot,
-                            ) {
-                              if (snapshot.hasData) {
-                                if ((snapshot.data?.docs.length ?? 0) > 0) {
-                                  return ListView.separated(
-                                    shrinkWrap: true,
-                                    itemCount: snapshot.data!.docs.length,
-                                    itemBuilder: (context, index) =>
-                                        ListTileAddNewScreenWidget(
-                                      documentSnapshot:
-                                          snapshot.data?.docs[index],
-                                    ),
-                                    separatorBuilder:
-                                        (BuildContext context, int index) =>
-                                            const Divider(),
-                                  );
-                                } else {
-                                  return const Center(
-                                    child: Text('No user found...'),
-                                  );
-                                }
-                              } else {
-                                return Column(
-                                  children: List.generate(
-                                    5,
-                                    (index) => const ListTileEmptyWidget(),
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-                      orElse: () {
-                        return Container();
-                      });
+                    usersLoaded: (users) => StreamBuilder<QuerySnapshot>(
+                      // TODO:
+                      // En su debido tiempo cambiar el limite para que sea paginado.
+                      stream: users,
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot,
+                      ) {
+                        if (snapshot.hasData) {
+                          if ((snapshot.data?.docs.length ?? 0) > 0) {
+                            return ListView.separated(
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.docs.length,
+                              itemBuilder: (context, index) =>
+                                  ListTileAddNewScreenWidget(
+                                documentSnapshot: snapshot.data?.docs[index],
+                              ),
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                                      const Divider(),
+                            );
+                          } else {
+                            return const Center(
+                              child: Text('No user found...'),
+                            );
+                          }
+                        } else {
+                          return Column(
+                            children: List.generate(
+                              5,
+                              (index) => const ListTileEmptyWidget(),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                    orElse: () {
+                      return Container();
+                    },
+                  );
                 },
               ),
             ),

@@ -9,8 +9,8 @@ class ChatEvent with _$ChatEvent {
     String? textSearch,
   }) = ChatGetUsersEvent;
 
-  const factory ChatEvent.getUsersAlreadyInChat({
+  const factory ChatEvent.getUsersAlreadyWithChat({
     required int limit,
     String? textSearch,
-  }) = ChatGetUsersAlreadyInChatEvent;
+  }) = ChatGetUsersAlreadyWithChatEvent;
 }

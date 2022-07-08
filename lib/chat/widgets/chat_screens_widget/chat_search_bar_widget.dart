@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ChatSearchBarWidget extends StatelessWidget {
   const ChatSearchBarWidget({
-    Key? key,
+    super.key,
     required this.controller,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   final TextEditingController? controller;
   final Function(String)? onChanged;
