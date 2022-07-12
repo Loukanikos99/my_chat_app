@@ -1,10 +1,11 @@
+import 'package:chat_app_client/models/chat_messaging_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/room_widgets.dart';
 
 class MessagesListWidget extends StatelessWidget {
-  MessagesListWidget(this.index, this.chatMessage);
+  MessagesListWidget(this.index, this.chatMessage, {super.key});
 
   final int index;
   final ChatMessage chatMessage;

@@ -26,6 +26,20 @@ Map<String, dynamic> _$$AuthStateLoadingToJson(_$AuthStateLoading instance) =>
       'runtimeType': instance.$type,
     };
 
+_$AuthStateLoadedProfileImage _$$AuthStateLoadedProfileImageFromJson(
+        Map<String, dynamic> json) =>
+    _$AuthStateLoadedProfileImage(
+      imageFilePath: json['imageFilePath'] as String,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$AuthStateLoadedProfileImageToJson(
+        _$AuthStateLoadedProfileImage instance) =>
+    <String, dynamic>{
+      'imageFilePath': instance.imageFilePath,
+      'runtimeType': instance.$type,
+    };
+
 _$AuthStateAuthenticated _$$AuthStateAuthenticatedFromJson(
         Map<String, dynamic> json) =>
     _$AuthStateAuthenticated(

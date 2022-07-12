@@ -19,50 +19,57 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) signIn,
+    required TResult Function() googleSignIn,
     required TResult Function() signOut,
-    required TResult Function(
-            String email, String password, String name, String? picture)
+    required TResult Function(String email, String password, String name)
         register,
+    required TResult Function() getProfileImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
     TResult Function()? signOut,
-    TResult Function(
-            String email, String password, String name, String? picture)?
-        register,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
     TResult Function()? signOut,
-    TResult Function(
-            String email, String password, String name, String? picture)?
-        register,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthSignInEvent value) signIn,
+    required TResult Function(AuthGoogleSignInEvent value) googleSignIn,
     required TResult Function(AuthSignOutEvent value) signOut,
     required TResult Function(AuthRegisterEvent value) register,
+    required TResult Function(AuthGetProfileImageEvent value) getProfileImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
     TResult Function(AuthSignOutEvent value)? signOut,
     TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
     TResult Function(AuthSignOutEvent value)? signOut,
     TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -159,10 +166,11 @@ class _$AuthSignInEvent implements AuthSignInEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) signIn,
+    required TResult Function() googleSignIn,
     required TResult Function() signOut,
-    required TResult Function(
-            String email, String password, String name, String? picture)
+    required TResult Function(String email, String password, String name)
         register,
+    required TResult Function() getProfileImage,
   }) {
     return signIn(username, password);
   }
@@ -171,10 +179,10 @@ class _$AuthSignInEvent implements AuthSignInEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
     TResult Function()? signOut,
-    TResult Function(
-            String email, String password, String name, String? picture)?
-        register,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
   }) {
     return signIn?.call(username, password);
   }
@@ -183,10 +191,10 @@ class _$AuthSignInEvent implements AuthSignInEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
     TResult Function()? signOut,
-    TResult Function(
-            String email, String password, String name, String? picture)?
-        register,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -199,8 +207,10 @@ class _$AuthSignInEvent implements AuthSignInEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthSignInEvent value) signIn,
+    required TResult Function(AuthGoogleSignInEvent value) googleSignIn,
     required TResult Function(AuthSignOutEvent value) signOut,
     required TResult Function(AuthRegisterEvent value) register,
+    required TResult Function(AuthGetProfileImageEvent value) getProfileImage,
   }) {
     return signIn(this);
   }
@@ -209,8 +219,10 @@ class _$AuthSignInEvent implements AuthSignInEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
     TResult Function(AuthSignOutEvent value)? signOut,
     TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
   }) {
     return signIn?.call(this);
   }
@@ -219,8 +231,10 @@ class _$AuthSignInEvent implements AuthSignInEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
     TResult Function(AuthSignOutEvent value)? signOut,
     TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -240,6 +254,130 @@ abstract class AuthSignInEvent implements AuthEvent {
   @JsonKey(ignore: true)
   _$$AuthSignInEventCopyWith<_$AuthSignInEvent> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AuthGoogleSignInEventCopyWith<$Res> {
+  factory _$$AuthGoogleSignInEventCopyWith(_$AuthGoogleSignInEvent value,
+          $Res Function(_$AuthGoogleSignInEvent) then) =
+      __$$AuthGoogleSignInEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AuthGoogleSignInEventCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res>
+    implements _$$AuthGoogleSignInEventCopyWith<$Res> {
+  __$$AuthGoogleSignInEventCopyWithImpl(_$AuthGoogleSignInEvent _value,
+      $Res Function(_$AuthGoogleSignInEvent) _then)
+      : super(_value, (v) => _then(v as _$AuthGoogleSignInEvent));
+
+  @override
+  _$AuthGoogleSignInEvent get _value => super._value as _$AuthGoogleSignInEvent;
+}
+
+/// @nodoc
+
+class _$AuthGoogleSignInEvent implements AuthGoogleSignInEvent {
+  const _$AuthGoogleSignInEvent();
+
+  @override
+  String toString() {
+    return 'AuthEvent.googleSignIn()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AuthGoogleSignInEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String username, String password) signIn,
+    required TResult Function() googleSignIn,
+    required TResult Function() signOut,
+    required TResult Function(String email, String password, String name)
+        register,
+    required TResult Function() getProfileImage,
+  }) {
+    return googleSignIn();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
+    TResult Function()? signOut,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
+  }) {
+    return googleSignIn?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
+    TResult Function()? signOut,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
+    required TResult orElse(),
+  }) {
+    if (googleSignIn != null) {
+      return googleSignIn();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthSignInEvent value) signIn,
+    required TResult Function(AuthGoogleSignInEvent value) googleSignIn,
+    required TResult Function(AuthSignOutEvent value) signOut,
+    required TResult Function(AuthRegisterEvent value) register,
+    required TResult Function(AuthGetProfileImageEvent value) getProfileImage,
+  }) {
+    return googleSignIn(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
+    TResult Function(AuthSignOutEvent value)? signOut,
+    TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
+  }) {
+    return googleSignIn?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
+    TResult Function(AuthSignOutEvent value)? signOut,
+    TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
+    required TResult orElse(),
+  }) {
+    if (googleSignIn != null) {
+      return googleSignIn(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthGoogleSignInEvent implements AuthEvent {
+  const factory AuthGoogleSignInEvent() = _$AuthGoogleSignInEvent;
 }
 
 /// @nodoc
@@ -284,10 +422,11 @@ class _$AuthSignOutEvent implements AuthSignOutEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) signIn,
+    required TResult Function() googleSignIn,
     required TResult Function() signOut,
-    required TResult Function(
-            String email, String password, String name, String? picture)
+    required TResult Function(String email, String password, String name)
         register,
+    required TResult Function() getProfileImage,
   }) {
     return signOut();
   }
@@ -296,10 +435,10 @@ class _$AuthSignOutEvent implements AuthSignOutEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
     TResult Function()? signOut,
-    TResult Function(
-            String email, String password, String name, String? picture)?
-        register,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
   }) {
     return signOut?.call();
   }
@@ -308,10 +447,10 @@ class _$AuthSignOutEvent implements AuthSignOutEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
     TResult Function()? signOut,
-    TResult Function(
-            String email, String password, String name, String? picture)?
-        register,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
     required TResult orElse(),
   }) {
     if (signOut != null) {
@@ -324,8 +463,10 @@ class _$AuthSignOutEvent implements AuthSignOutEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthSignInEvent value) signIn,
+    required TResult Function(AuthGoogleSignInEvent value) googleSignIn,
     required TResult Function(AuthSignOutEvent value) signOut,
     required TResult Function(AuthRegisterEvent value) register,
+    required TResult Function(AuthGetProfileImageEvent value) getProfileImage,
   }) {
     return signOut(this);
   }
@@ -334,8 +475,10 @@ class _$AuthSignOutEvent implements AuthSignOutEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
     TResult Function(AuthSignOutEvent value)? signOut,
     TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
   }) {
     return signOut?.call(this);
   }
@@ -344,8 +487,10 @@ class _$AuthSignOutEvent implements AuthSignOutEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
     TResult Function(AuthSignOutEvent value)? signOut,
     TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
     required TResult orElse(),
   }) {
     if (signOut != null) {
@@ -364,7 +509,7 @@ abstract class _$$AuthRegisterEventCopyWith<$Res> {
   factory _$$AuthRegisterEventCopyWith(
           _$AuthRegisterEvent value, $Res Function(_$AuthRegisterEvent) then) =
       __$$AuthRegisterEventCopyWithImpl<$Res>;
-  $Res call({String email, String password, String name, String? picture});
+  $Res call({String email, String password, String name});
 }
 
 /// @nodoc
@@ -383,7 +528,6 @@ class __$$AuthRegisterEventCopyWithImpl<$Res>
     Object? email = freezed,
     Object? password = freezed,
     Object? name = freezed,
-    Object? picture = freezed,
   }) {
     return _then(_$AuthRegisterEvent(
       email: email == freezed
@@ -398,10 +542,6 @@ class __$$AuthRegisterEventCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      picture: picture == freezed
-          ? _value.picture
-          : picture // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -410,10 +550,7 @@ class __$$AuthRegisterEventCopyWithImpl<$Res>
 
 class _$AuthRegisterEvent implements AuthRegisterEvent {
   const _$AuthRegisterEvent(
-      {required this.email,
-      required this.password,
-      required this.name,
-      this.picture});
+      {required this.email, required this.password, required this.name});
 
   @override
   final String email;
@@ -421,12 +558,10 @@ class _$AuthRegisterEvent implements AuthRegisterEvent {
   final String password;
   @override
   final String name;
-  @override
-  final String? picture;
 
   @override
   String toString() {
-    return 'AuthEvent.register(email: $email, password: $password, name: $name, picture: $picture)';
+    return 'AuthEvent.register(email: $email, password: $password, name: $name)';
   }
 
   @override
@@ -436,8 +571,7 @@ class _$AuthRegisterEvent implements AuthRegisterEvent {
             other is _$AuthRegisterEvent &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.picture, picture));
+            const DeepCollectionEquality().equals(other.name, name));
   }
 
   @override
@@ -445,8 +579,7 @@ class _$AuthRegisterEvent implements AuthRegisterEvent {
       runtimeType,
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(picture));
+      const DeepCollectionEquality().hash(name));
 
   @JsonKey(ignore: true)
   @override
@@ -457,38 +590,39 @@ class _$AuthRegisterEvent implements AuthRegisterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) signIn,
+    required TResult Function() googleSignIn,
     required TResult Function() signOut,
-    required TResult Function(
-            String email, String password, String name, String? picture)
+    required TResult Function(String email, String password, String name)
         register,
+    required TResult Function() getProfileImage,
   }) {
-    return register(email, password, name, picture);
+    return register(email, password, name);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
     TResult Function()? signOut,
-    TResult Function(
-            String email, String password, String name, String? picture)?
-        register,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
   }) {
-    return register?.call(email, password, name, picture);
+    return register?.call(email, password, name);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
     TResult Function()? signOut,
-    TResult Function(
-            String email, String password, String name, String? picture)?
-        register,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
     required TResult orElse(),
   }) {
     if (register != null) {
-      return register(email, password, name, picture);
+      return register(email, password, name);
     }
     return orElse();
   }
@@ -497,8 +631,10 @@ class _$AuthRegisterEvent implements AuthRegisterEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthSignInEvent value) signIn,
+    required TResult Function(AuthGoogleSignInEvent value) googleSignIn,
     required TResult Function(AuthSignOutEvent value) signOut,
     required TResult Function(AuthRegisterEvent value) register,
+    required TResult Function(AuthGetProfileImageEvent value) getProfileImage,
   }) {
     return register(this);
   }
@@ -507,8 +643,10 @@ class _$AuthRegisterEvent implements AuthRegisterEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
     TResult Function(AuthSignOutEvent value)? signOut,
     TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
   }) {
     return register?.call(this);
   }
@@ -517,8 +655,10 @@ class _$AuthRegisterEvent implements AuthRegisterEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
     TResult Function(AuthSignOutEvent value)? signOut,
     TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -532,14 +672,138 @@ abstract class AuthRegisterEvent implements AuthEvent {
   const factory AuthRegisterEvent(
       {required final String email,
       required final String password,
-      required final String name,
-      final String? picture}) = _$AuthRegisterEvent;
+      required final String name}) = _$AuthRegisterEvent;
 
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String? get picture => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$AuthRegisterEventCopyWith<_$AuthRegisterEvent> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AuthGetProfileImageEventCopyWith<$Res> {
+  factory _$$AuthGetProfileImageEventCopyWith(_$AuthGetProfileImageEvent value,
+          $Res Function(_$AuthGetProfileImageEvent) then) =
+      __$$AuthGetProfileImageEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AuthGetProfileImageEventCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res>
+    implements _$$AuthGetProfileImageEventCopyWith<$Res> {
+  __$$AuthGetProfileImageEventCopyWithImpl(_$AuthGetProfileImageEvent _value,
+      $Res Function(_$AuthGetProfileImageEvent) _then)
+      : super(_value, (v) => _then(v as _$AuthGetProfileImageEvent));
+
+  @override
+  _$AuthGetProfileImageEvent get _value =>
+      super._value as _$AuthGetProfileImageEvent;
+}
+
+/// @nodoc
+
+class _$AuthGetProfileImageEvent implements AuthGetProfileImageEvent {
+  const _$AuthGetProfileImageEvent();
+
+  @override
+  String toString() {
+    return 'AuthEvent.getProfileImage()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthGetProfileImageEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String username, String password) signIn,
+    required TResult Function() googleSignIn,
+    required TResult Function() signOut,
+    required TResult Function(String email, String password, String name)
+        register,
+    required TResult Function() getProfileImage,
+  }) {
+    return getProfileImage();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
+    TResult Function()? signOut,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
+  }) {
+    return getProfileImage?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String username, String password)? signIn,
+    TResult Function()? googleSignIn,
+    TResult Function()? signOut,
+    TResult Function(String email, String password, String name)? register,
+    TResult Function()? getProfileImage,
+    required TResult orElse(),
+  }) {
+    if (getProfileImage != null) {
+      return getProfileImage();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthSignInEvent value) signIn,
+    required TResult Function(AuthGoogleSignInEvent value) googleSignIn,
+    required TResult Function(AuthSignOutEvent value) signOut,
+    required TResult Function(AuthRegisterEvent value) register,
+    required TResult Function(AuthGetProfileImageEvent value) getProfileImage,
+  }) {
+    return getProfileImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
+    TResult Function(AuthSignOutEvent value)? signOut,
+    TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
+  }) {
+    return getProfileImage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthSignInEvent value)? signIn,
+    TResult Function(AuthGoogleSignInEvent value)? googleSignIn,
+    TResult Function(AuthSignOutEvent value)? signOut,
+    TResult Function(AuthRegisterEvent value)? register,
+    TResult Function(AuthGetProfileImageEvent value)? getProfileImage,
+    required TResult orElse(),
+  }) {
+    if (getProfileImage != null) {
+      return getProfileImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthGetProfileImageEvent implements AuthEvent {
+  const factory AuthGetProfileImageEvent() = _$AuthGetProfileImageEvent;
 }

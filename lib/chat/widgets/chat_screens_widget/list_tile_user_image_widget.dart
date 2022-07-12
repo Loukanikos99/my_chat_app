@@ -1,7 +1,7 @@
+import 'package:chat_app_client/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_chat_app/chat/constants/common_widgets.dart';
-import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tiles.dart';
 
 class ListTileUserImageWidget extends StatelessWidget {
   const ListTileUserImageWidget({
@@ -21,8 +21,11 @@ class ListTileUserImageWidget extends StatelessWidget {
               height: 60,
               width: 60,
               fit: BoxFit.cover,
-              loadingBuilder: (BuildContext ctx, Widget child,
-                  ImageChunkEvent? loadingProgress) {
+              loadingBuilder: (
+                BuildContext ctx,
+                Widget child,
+                ImageChunkEvent? loadingProgress,
+              ) {
                 if (loadingProgress == null) return child;
                 return Container(
                   decoration: BoxDecoration(

@@ -1,5 +1,5 @@
 import 'package:chat_app_client/constants/firestore_constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chat_app_client/models/chat_messaging_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -116,19 +116,14 @@ class ViewLastMessageWidget extends StatelessWidget {
         return state.maybeWhen(
           messagesloaded: (messagges) => StreamBuilder(
             stream: messagges,
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
-                final listMessages = snapshot.data!.docs;
-                if (listMessages.isNotEmpty) {
-                  return SizedBox(
-                    height: 20,
-                    child: Text(
-                      listMessages.last['isRead'] == true ? 'Leído' : '',
-                    ),
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
+            builder: (context, AsyncSnapshot<List<ChatMessage>> snapshot) {
+              if (snapshot.data?.isNotEmpty ?? false) {
+                return SizedBox(
+                  height: 20,
+                  child: Text(
+                    snapshot.data?.last.isRead == true ? 'Leído' : '',
+                  ),
+                );
               } else {
                 return const SizedBox.shrink();
               }

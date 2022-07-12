@@ -11,9 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
-  freezed: ^2.0.3+1
   flutter_localizations:
     sdk: flutter
+  freezed: ^2.0.3+1
   intl: ^0.17.0
 
   chat_app_client:
@@ -27,7 +27,9 @@ dependencies:
   fluttertoast: ^8.0.9
   get: ^4.6.5
   hydrated_bloc: ^8.1.0
+  google_sign_in: ^5.3.3
   path_provider: ^2.0.11
+  font_awesome_flutter: ^10.1.0
 
 dev_dependencies:
   bloc_test: ^9.0.3

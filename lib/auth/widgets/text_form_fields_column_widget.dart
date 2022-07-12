@@ -1,14 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_chat_app/resources/text_styles.dart';
 
 class TextFormFieldsColumnWidget extends StatelessWidget {
-  const TextFormFieldsColumnWidget.login(
-      {super.key,
-      required TextEditingController email,
-      required TextEditingController password,
-      required GlobalKey<FormState> formKey,})
-      : _contructor = Contructors.login,
+  const TextFormFieldsColumnWidget.login({
+    super.key,
+    required TextEditingController email,
+    required TextEditingController password,
+    required GlobalKey<FormState> formKey,
+  })  : _contructor = Contructors.login,
         _formKey = formKey,
         _email = email,
         _password = password,
@@ -42,7 +43,6 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
         key: _formKey,
         child: Column(
           children: [
-            SizedBox(height: size.height * 0.1),
             if (_contructor == Contructors.register)
               TextFormField(
                 controller: _name,
@@ -55,7 +55,9 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
                     Icons.account_box,
                     color: Colors.grey[400],
                   ),
-                  border: InputBorder.none,
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 5),
+                  ),
                   errorStyle: const TextStyle(fontSize: 10),
                   labelText: 'Nombre completo',
                 ),
@@ -66,6 +68,7 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
                   return null;
                 },
               ),
+            SizedBox(height: size.height * 0.02),
             TextFormField(
               controller: _email,
               autofillHints: const [AutofillHints.email],
@@ -77,7 +80,9 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
                   Icons.mail,
                   color: Colors.grey[400],
                 ),
-                border: InputBorder.none,
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 5.0),
+                ),
                 errorStyle: const TextStyle(fontSize: 10),
                 labelText: 'Correo electrónico',
               ),
@@ -89,21 +94,29 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
                 final regex = RegExp(pattern);
                 if (value == null || value.isEmpty) {
                   return 'Este campo es obligatorio';
-                } else if (!regex.hasMatch(value)) {
+                }
+                if (!regex.hasMatch(value)) {
                   return 'error';
                 }
                 return null;
               },
             ),
+            SizedBox(height: size.height * 0.02),
             TextFormField(
               controller: _password,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               autofillHints: const [AutofillHints.password],
               style: TextStyles.input(context),
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                errorStyle: TextStyle(fontSize: 10),
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  FontAwesomeIcons.lock,
+                  color: Colors.grey[400],
+                ),
+                errorStyle: const TextStyle(fontSize: 10),
                 labelText: 'Password',
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 5.0),
+                ),
               ),
               validator: (value) {
                 if (value == '') {
@@ -112,6 +125,7 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
                 return null;
               },
             ),
+            SizedBox(height: size.height * 0.1),
           ],
         ),
       ),

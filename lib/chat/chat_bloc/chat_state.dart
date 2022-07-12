@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chat_app_client/models/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chat_state.freezed.dart';
@@ -10,7 +10,7 @@ class ChatState with _$ChatState {
   const factory ChatState.loading() = ChatStateLoading;
 
   const factory ChatState.usersLoaded({
-    required Stream<QuerySnapshot<Object?>> users,
+    required Stream<List<User>> users,
   }) = ChatStateUsersLoaded;
 
   const factory ChatState.failed(String errorMsg) = ChatStateFailed;

@@ -1,3 +1,4 @@
+import 'package:chat_app_client/models/chat_messaging_model.dart';
 import 'package:chat_app_client/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
@@ -12,7 +13,7 @@ mixin ChatAppClientBase {
   Future<User?> login(String email, String password);
 
   ///Trais to login with a token using GoogleSignIn.
-  Future<auth.UserCredential?> loginFirebaseGoogle({required String token});
+  Future<User?> loginFirebaseGoogle({required String token});
 
   /// Trais to logout the current user.
   Future<void> signOut();
@@ -48,7 +49,7 @@ mixin ChatAppClientBase {
   void updateUnreadMessage(
     String groupChatId,
     String docPath,
-    QueryDocumentSnapshot<Object?> chatMessage,
+    ChatMessage chatMessage,
   );
 
   /// Trais to get the messages from an specific chat.

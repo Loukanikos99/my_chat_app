@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chat_app_client/models/chat_messaging_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'room_state.freezed.dart';
@@ -12,7 +12,7 @@ class RoomState with _$RoomState {
   const factory RoomState.loaded() = RoomStateLoaded;
 
   const factory RoomState.messagesloaded({
-    required Stream<QuerySnapshot<Object?>> messages,
+    required Stream<List<ChatMessage>> messages,
   }) = RoomStateMessaggesMessaggesLoaded;
 
   const factory RoomState.failed() = RoomStateFailed;

@@ -1,22 +1,19 @@
 import 'package:chat_app_client/chat_app_client.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chat_app_client/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
 import 'package:my_chat_app/chat/view/room_screen.dart';
-import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tile_user_image_widget.dart';
-import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tile_user_name_widget.dart';
-import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tiles.dart';
+import 'package:my_chat_app/chat/widgets/chat_screens_widget/widgets_chat_screens.dart';
 
 class ListTileAddNewScreenWidget extends StatelessWidget {
-  const ListTileAddNewScreenWidget({super.key, required this.documentSnapshot});
+  const ListTileAddNewScreenWidget({super.key, required this.user});
 
-  final DocumentSnapshot? documentSnapshot;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final userChat = User.fromDocument(documentSnapshot!);
     return GestureDetector(
       onTap: () {
         Navigator.push<dynamic>(
@@ -24,7 +21,7 @@ class ListTileAddNewScreenWidget extends StatelessWidget {
           MaterialPageRoute<dynamic>(
             builder: (context) => BlocProvider(
               create: (context) => RoomBloc(
-                otherUser: userChat,
+                otherUser: user,
                 chatAppClient: ChatAppClient(),
               ),
               child: const RoomScreen(),
@@ -38,9 +35,9 @@ class ListTileAddNewScreenWidget extends StatelessWidget {
           Row(
             children: [
               SizedBox(width: screenSize.width * 0.05),
-              ListTileUserImageWidget(userChat: userChat),
+              ListTileUserImageWidget(userChat: user),
               SizedBox(width: screenSize.width * 0.1),
-              ListTileUserNameWidget(userChat: userChat),
+              ListTileUserNameWidget(userChat: user),
               const Spacer(),
               const Icon(Icons.arrow_forward_rounded),
               SizedBox(width: screenSize.width * 0.1),

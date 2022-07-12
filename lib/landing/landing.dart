@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_chat_app/auth/bloc/auth_bloc.dart';
 import 'package:my_chat_app/auth/bloc/auth_state.dart';
-import 'package:my_chat_app/auth/view/login_page.dart';
+import 'package:my_chat_app/auth/view/login_screen.dart';
 import 'package:my_chat_app/chat/chat_bloc/chat_bloc.dart';
 import 'package:my_chat_app/chat/view/chat_screen.dart';
 

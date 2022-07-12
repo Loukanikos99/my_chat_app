@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chat_app_client/models/chat_messaging_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'room_event.freezed.dart';
@@ -18,7 +18,7 @@ class RoomEvent with _$RoomEvent {
 
   const factory RoomEvent.updateUnreadMessage({
     required String docPath,
-    required QueryDocumentSnapshot<Object?> chatMessage,
+    required ChatMessage chatMessage,
   }) = RoomUpdateUnreadMessageEvent;
 
   const factory RoomEvent.updateFirestoreData({

@@ -10,6 +10,9 @@ class AuthState with _$AuthState {
 
   const factory AuthState.loading() = AuthStateLoading;
 
+  const factory AuthState.loadedProfileImage({required String imageFilePath}) =
+      AuthStateLoadedProfileImage;
+
   const factory AuthState.authenticated({required User user}) =
       AuthStateAuthenticated;
 

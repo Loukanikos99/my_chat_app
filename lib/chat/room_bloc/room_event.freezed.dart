@@ -21,8 +21,7 @@ mixin _$RoomEvent {
     required TResult Function(String content, int type) sendMessage,
     required TResult Function(int limit) getChatMessage,
     required TResult Function() getImage,
-    required TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)
+    required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
     required TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)
@@ -34,8 +33,7 @@ mixin _$RoomEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -47,8 +45,7 @@ mixin _$RoomEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -182,8 +179,7 @@ class _$RoomSendMessageEvent implements RoomSendMessageEvent {
     required TResult Function(String content, int type) sendMessage,
     required TResult Function(int limit) getChatMessage,
     required TResult Function() getImage,
-    required TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)
+    required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
     required TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)
@@ -198,8 +194,7 @@ class _$RoomSendMessageEvent implements RoomSendMessageEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -214,8 +209,7 @@ class _$RoomSendMessageEvent implements RoomSendMessageEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -354,8 +348,7 @@ class _$RoomGetChatMessagesEvent implements RoomGetChatMessagesEvent {
     required TResult Function(String content, int type) sendMessage,
     required TResult Function(int limit) getChatMessage,
     required TResult Function() getImage,
-    required TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)
+    required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
     required TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)
@@ -370,8 +363,7 @@ class _$RoomGetChatMessagesEvent implements RoomGetChatMessagesEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -386,8 +378,7 @@ class _$RoomGetChatMessagesEvent implements RoomGetChatMessagesEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -497,8 +488,7 @@ class _$RoomGetImageEvent implements RoomGetImageEvent {
     required TResult Function(String content, int type) sendMessage,
     required TResult Function(int limit) getChatMessage,
     required TResult Function() getImage,
-    required TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)
+    required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
     required TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)
@@ -513,8 +503,7 @@ class _$RoomGetImageEvent implements RoomGetImageEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -529,8 +518,7 @@ class _$RoomGetImageEvent implements RoomGetImageEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -596,7 +584,7 @@ abstract class _$$RoomUpdateUnreadMessageEventCopyWith<$Res> {
           _$RoomUpdateUnreadMessageEvent value,
           $Res Function(_$RoomUpdateUnreadMessageEvent) then) =
       __$$RoomUpdateUnreadMessageEventCopyWithImpl<$Res>;
-  $Res call({String docPath, QueryDocumentSnapshot<Object?> chatMessage});
+  $Res call({String docPath, ChatMessage chatMessage});
 }
 
 /// @nodoc
@@ -625,7 +613,7 @@ class __$$RoomUpdateUnreadMessageEventCopyWithImpl<$Res>
       chatMessage: chatMessage == freezed
           ? _value.chatMessage
           : chatMessage // ignore: cast_nullable_to_non_nullable
-              as QueryDocumentSnapshot<Object?>,
+              as ChatMessage,
     ));
   }
 }
@@ -639,7 +627,7 @@ class _$RoomUpdateUnreadMessageEvent implements RoomUpdateUnreadMessageEvent {
   @override
   final String docPath;
   @override
-  final QueryDocumentSnapshot<Object?> chatMessage;
+  final ChatMessage chatMessage;
 
   @override
   String toString() {
@@ -674,8 +662,7 @@ class _$RoomUpdateUnreadMessageEvent implements RoomUpdateUnreadMessageEvent {
     required TResult Function(String content, int type) sendMessage,
     required TResult Function(int limit) getChatMessage,
     required TResult Function() getImage,
-    required TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)
+    required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
     required TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)
@@ -690,8 +677,7 @@ class _$RoomUpdateUnreadMessageEvent implements RoomUpdateUnreadMessageEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -706,8 +692,7 @@ class _$RoomUpdateUnreadMessageEvent implements RoomUpdateUnreadMessageEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -765,13 +750,11 @@ class _$RoomUpdateUnreadMessageEvent implements RoomUpdateUnreadMessageEvent {
 
 abstract class RoomUpdateUnreadMessageEvent implements RoomEvent {
   const factory RoomUpdateUnreadMessageEvent(
-          {required final String docPath,
-          required final QueryDocumentSnapshot<Object?> chatMessage}) =
-      _$RoomUpdateUnreadMessageEvent;
+      {required final String docPath,
+      required final ChatMessage chatMessage}) = _$RoomUpdateUnreadMessageEvent;
 
   String get docPath => throw _privateConstructorUsedError;
-  QueryDocumentSnapshot<Object?> get chatMessage =>
-      throw _privateConstructorUsedError;
+  ChatMessage get chatMessage => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$RoomUpdateUnreadMessageEventCopyWith<_$RoomUpdateUnreadMessageEvent>
       get copyWith => throw _privateConstructorUsedError;
@@ -879,8 +862,7 @@ class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
     required TResult Function(String content, int type) sendMessage,
     required TResult Function(int limit) getChatMessage,
     required TResult Function() getImage,
-    required TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)
+    required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
     required TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)
@@ -895,8 +877,7 @@ class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?
@@ -911,8 +892,7 @@ class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
     TResult Function(String content, int type)? sendMessage,
     TResult Function(int limit)? getChatMessage,
     TResult Function()? getImage,
-    TResult Function(
-            String docPath, QueryDocumentSnapshot<Object?> chatMessage)?
+    TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
     TResult Function(String collectionPath, String docPath,
             Map<String, dynamic> dataUpdate)?

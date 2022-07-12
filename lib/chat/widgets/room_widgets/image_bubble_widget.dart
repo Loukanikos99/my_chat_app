@@ -1,5 +1,5 @@
+import 'package:chat_app_client/models/chat_messaging_model.dart';
 import 'package:flutter/material.dart';
-import 'package:my_chat_app/chat/constants/common_widgets.dart';
 import 'package:my_chat_app/chat/widgets/chat_screens_widget/message_time_stamp_widget.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/room_widgets.dart';
 

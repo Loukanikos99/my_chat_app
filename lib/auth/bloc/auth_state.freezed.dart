@@ -20,6 +20,8 @@ AuthState _$AuthStateFromJson(Map<String, dynamic> json) {
       return AuthStateInitial.fromJson(json);
     case 'loading':
       return AuthStateLoading.fromJson(json);
+    case 'loadedProfileImage':
+      return AuthStateLoadedProfileImage.fromJson(json);
     case 'authenticated':
       return AuthStateAuthenticated.fromJson(json);
     case 'unauthenticated':
@@ -39,6 +41,7 @@ mixin _$AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String errorMsg) failed,
@@ -48,6 +51,7 @@ mixin _$AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -57,6 +61,7 @@ mixin _$AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -67,6 +72,8 @@ mixin _$AuthState {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStateInitial value) initial,
     required TResult Function(AuthStateLoading value) loading,
+    required TResult Function(AuthStateLoadedProfileImage value)
+        loadedProfileImage,
     required TResult Function(AuthStateAuthenticated value) authenticated,
     required TResult Function(AuthStateUnauthenticated value) unauthenticated,
     required TResult Function(AuthStateFailed value) failed,
@@ -76,6 +83,7 @@ mixin _$AuthState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -85,6 +93,7 @@ mixin _$AuthState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -159,6 +168,7 @@ class _$AuthStateInitial implements AuthStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String errorMsg) failed,
@@ -171,6 +181,7 @@ class _$AuthStateInitial implements AuthStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -183,6 +194,7 @@ class _$AuthStateInitial implements AuthStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -199,6 +211,8 @@ class _$AuthStateInitial implements AuthStateInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStateInitial value) initial,
     required TResult Function(AuthStateLoading value) loading,
+    required TResult Function(AuthStateLoadedProfileImage value)
+        loadedProfileImage,
     required TResult Function(AuthStateAuthenticated value) authenticated,
     required TResult Function(AuthStateUnauthenticated value) unauthenticated,
     required TResult Function(AuthStateFailed value) failed,
@@ -211,6 +225,7 @@ class _$AuthStateInitial implements AuthStateInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -223,6 +238,7 @@ class _$AuthStateInitial implements AuthStateInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -297,6 +313,7 @@ class _$AuthStateLoading implements AuthStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String errorMsg) failed,
@@ -309,6 +326,7 @@ class _$AuthStateLoading implements AuthStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -321,6 +339,7 @@ class _$AuthStateLoading implements AuthStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -337,6 +356,8 @@ class _$AuthStateLoading implements AuthStateLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStateInitial value) initial,
     required TResult Function(AuthStateLoading value) loading,
+    required TResult Function(AuthStateLoadedProfileImage value)
+        loadedProfileImage,
     required TResult Function(AuthStateAuthenticated value) authenticated,
     required TResult Function(AuthStateUnauthenticated value) unauthenticated,
     required TResult Function(AuthStateFailed value) failed,
@@ -349,6 +370,7 @@ class _$AuthStateLoading implements AuthStateLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -361,6 +383,7 @@ class _$AuthStateLoading implements AuthStateLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -383,6 +406,188 @@ abstract class AuthStateLoading implements AuthState {
 
   factory AuthStateLoading.fromJson(Map<String, dynamic> json) =
       _$AuthStateLoading.fromJson;
+}
+
+/// @nodoc
+abstract class _$$AuthStateLoadedProfileImageCopyWith<$Res> {
+  factory _$$AuthStateLoadedProfileImageCopyWith(
+          _$AuthStateLoadedProfileImage value,
+          $Res Function(_$AuthStateLoadedProfileImage) then) =
+      __$$AuthStateLoadedProfileImageCopyWithImpl<$Res>;
+  $Res call({String imageFilePath});
+}
+
+/// @nodoc
+class __$$AuthStateLoadedProfileImageCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res>
+    implements _$$AuthStateLoadedProfileImageCopyWith<$Res> {
+  __$$AuthStateLoadedProfileImageCopyWithImpl(
+      _$AuthStateLoadedProfileImage _value,
+      $Res Function(_$AuthStateLoadedProfileImage) _then)
+      : super(_value, (v) => _then(v as _$AuthStateLoadedProfileImage));
+
+  @override
+  _$AuthStateLoadedProfileImage get _value =>
+      super._value as _$AuthStateLoadedProfileImage;
+
+  @override
+  $Res call({
+    Object? imageFilePath = freezed,
+  }) {
+    return _then(_$AuthStateLoadedProfileImage(
+      imageFilePath: imageFilePath == freezed
+          ? _value.imageFilePath
+          : imageFilePath // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AuthStateLoadedProfileImage implements AuthStateLoadedProfileImage {
+  const _$AuthStateLoadedProfileImage(
+      {required this.imageFilePath, final String? $type})
+      : $type = $type ?? 'loadedProfileImage';
+
+  factory _$AuthStateLoadedProfileImage.fromJson(Map<String, dynamic> json) =>
+      _$$AuthStateLoadedProfileImageFromJson(json);
+
+  @override
+  final String imageFilePath;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'AuthState.loadedProfileImage(imageFilePath: $imageFilePath)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthStateLoadedProfileImage &&
+            const DeepCollectionEquality()
+                .equals(other.imageFilePath, imageFilePath));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(imageFilePath));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$AuthStateLoadedProfileImageCopyWith<_$AuthStateLoadedProfileImage>
+      get copyWith => __$$AuthStateLoadedProfileImageCopyWithImpl<
+          _$AuthStateLoadedProfileImage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String imageFilePath) loadedProfileImage,
+    required TResult Function(User user) authenticated,
+    required TResult Function() unauthenticated,
+    required TResult Function(String errorMsg) failed,
+  }) {
+    return loadedProfileImage(imageFilePath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
+    TResult Function(User user)? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function(String errorMsg)? failed,
+  }) {
+    return loadedProfileImage?.call(imageFilePath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
+    TResult Function(User user)? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function(String errorMsg)? failed,
+    required TResult orElse(),
+  }) {
+    if (loadedProfileImage != null) {
+      return loadedProfileImage(imageFilePath);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthStateInitial value) initial,
+    required TResult Function(AuthStateLoading value) loading,
+    required TResult Function(AuthStateLoadedProfileImage value)
+        loadedProfileImage,
+    required TResult Function(AuthStateAuthenticated value) authenticated,
+    required TResult Function(AuthStateUnauthenticated value) unauthenticated,
+    required TResult Function(AuthStateFailed value) failed,
+  }) {
+    return loadedProfileImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(AuthStateInitial value)? initial,
+    TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
+    TResult Function(AuthStateAuthenticated value)? authenticated,
+    TResult Function(AuthStateUnauthenticated value)? unauthenticated,
+    TResult Function(AuthStateFailed value)? failed,
+  }) {
+    return loadedProfileImage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthStateInitial value)? initial,
+    TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
+    TResult Function(AuthStateAuthenticated value)? authenticated,
+    TResult Function(AuthStateUnauthenticated value)? unauthenticated,
+    TResult Function(AuthStateFailed value)? failed,
+    required TResult orElse(),
+  }) {
+    if (loadedProfileImage != null) {
+      return loadedProfileImage(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AuthStateLoadedProfileImageToJson(this);
+  }
+}
+
+abstract class AuthStateLoadedProfileImage implements AuthState {
+  const factory AuthStateLoadedProfileImage(
+      {required final String imageFilePath}) = _$AuthStateLoadedProfileImage;
+
+  factory AuthStateLoadedProfileImage.fromJson(Map<String, dynamic> json) =
+      _$AuthStateLoadedProfileImage.fromJson;
+
+  String get imageFilePath => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$AuthStateLoadedProfileImageCopyWith<_$AuthStateLoadedProfileImage>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -462,6 +667,7 @@ class _$AuthStateAuthenticated implements AuthStateAuthenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String errorMsg) failed,
@@ -474,6 +680,7 @@ class _$AuthStateAuthenticated implements AuthStateAuthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -486,6 +693,7 @@ class _$AuthStateAuthenticated implements AuthStateAuthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -502,6 +710,8 @@ class _$AuthStateAuthenticated implements AuthStateAuthenticated {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStateInitial value) initial,
     required TResult Function(AuthStateLoading value) loading,
+    required TResult Function(AuthStateLoadedProfileImage value)
+        loadedProfileImage,
     required TResult Function(AuthStateAuthenticated value) authenticated,
     required TResult Function(AuthStateUnauthenticated value) unauthenticated,
     required TResult Function(AuthStateFailed value) failed,
@@ -514,6 +724,7 @@ class _$AuthStateAuthenticated implements AuthStateAuthenticated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -526,6 +737,7 @@ class _$AuthStateAuthenticated implements AuthStateAuthenticated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -609,6 +821,7 @@ class _$AuthStateUnauthenticated implements AuthStateUnauthenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String errorMsg) failed,
@@ -621,6 +834,7 @@ class _$AuthStateUnauthenticated implements AuthStateUnauthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -633,6 +847,7 @@ class _$AuthStateUnauthenticated implements AuthStateUnauthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -649,6 +864,8 @@ class _$AuthStateUnauthenticated implements AuthStateUnauthenticated {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStateInitial value) initial,
     required TResult Function(AuthStateLoading value) loading,
+    required TResult Function(AuthStateLoadedProfileImage value)
+        loadedProfileImage,
     required TResult Function(AuthStateAuthenticated value) authenticated,
     required TResult Function(AuthStateUnauthenticated value) unauthenticated,
     required TResult Function(AuthStateFailed value) failed,
@@ -661,6 +878,7 @@ class _$AuthStateUnauthenticated implements AuthStateUnauthenticated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -673,6 +891,7 @@ class _$AuthStateUnauthenticated implements AuthStateUnauthenticated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -772,6 +991,7 @@ class _$AuthStateFailed implements AuthStateFailed {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String errorMsg) failed,
@@ -784,6 +1004,7 @@ class _$AuthStateFailed implements AuthStateFailed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -796,6 +1017,7 @@ class _$AuthStateFailed implements AuthStateFailed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String errorMsg)? failed,
@@ -812,6 +1034,8 @@ class _$AuthStateFailed implements AuthStateFailed {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStateInitial value) initial,
     required TResult Function(AuthStateLoading value) loading,
+    required TResult Function(AuthStateLoadedProfileImage value)
+        loadedProfileImage,
     required TResult Function(AuthStateAuthenticated value) authenticated,
     required TResult Function(AuthStateUnauthenticated value) unauthenticated,
     required TResult Function(AuthStateFailed value) failed,
@@ -824,6 +1048,7 @@ class _$AuthStateFailed implements AuthStateFailed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,
@@ -836,6 +1061,7 @@ class _$AuthStateFailed implements AuthStateFailed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadedProfileImage value)? loadedProfileImage,
     TResult Function(AuthStateAuthenticated value)? authenticated,
     TResult Function(AuthStateUnauthenticated value)? unauthenticated,
     TResult Function(AuthStateFailed value)? failed,

@@ -56,13 +56,29 @@ class ChatAppClient with ChatAppClientBase {
   }
 
   @override
-  Future<auth.UserCredential?> loginFirebaseGoogle({
+  Future<User?> loginFirebaseGoogle({
     required String token,
   }) async {
     try {
+      User? user;
       final auth.AuthCredential credential =
           auth.GoogleAuthProvider.credential(accessToken: token);
-      return auth.FirebaseAuth.instance.signInWithCredential(credential);
+      final userCred = await auth.FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
+
+      user = await getUserInfo(userCred.user?.uid ?? '');
+      if (user != null) {
+        return user;
+      } else {
+        user = User(
+          id: userCred.user?.uid,
+          email: userCred.user?.email,
+          name: userCred.user?.displayName,
+          picture: userCred.user?.photoURL,
+        );
+        await updateOrRegister(user: user);
+      }
     } catch (e) {
       await Fluttertoast.showToast(
         msg: 'No se a podido loggear correctamente.',
@@ -86,7 +102,8 @@ class ChatAppClient with ChatAppClientBase {
       final userData = await auth.FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      /// Creamos un objeto User para instanciarlo con los pocos datos que tenemos
+      /// Creamos un objeto User para instanciarlo
+      /// con los pocos datos que tenemos
       /// Luego hacemos la insercion en Firestore
       final user = User();
       user
@@ -181,7 +198,7 @@ class ChatAppClient with ChatAppClientBase {
   Future<void> updateUnreadMessage(
     String groupChatId,
     String docPath,
-    QueryDocumentSnapshot<Object?> chatMessage,
+    ChatMessage chatMessage,
   ) async {
     final DocumentReference documentReference = firebaseFirestore
         .collection(FirestoreConstants.pathMessageCollection)
@@ -189,11 +206,10 @@ class ChatAppClient with ChatAppClientBase {
         .collection(groupChatId)
         .doc(docPath);
 
-    final lastMessage = ChatMessage.fromDocument(chatMessage);
-    lastMessage.isRead = true;
+    chatMessage.isRead = true;
     await FirebaseFirestore.instance.runTransaction(
       (transaction) async {
-        transaction.set(documentReference, lastMessage.toJson());
+        transaction.set(documentReference, chatMessage.toJson());
       },
     );
   }
@@ -275,11 +291,14 @@ class ChatAppClient with ChatAppClientBase {
           .startAt([firstLetterCapital]).endAt(
         ['$firstLetterCapital\uf8ff'],
       ).snapshots();
-    } else {
+      return;
+    }
+    if (chatIdsFromCurrentUser.isNotEmpty) {
       yield* firebaseFirestore
           .collection(FirestoreConstants.pathUserCollection)
           .where('id', whereIn: chatIdsFromCurrentUser)
           .snapshots();
+      return;
     }
   }
 }

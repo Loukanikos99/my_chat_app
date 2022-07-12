@@ -4,8 +4,8 @@
     "@counterAppBarTitle": {
         "description": "Texto mostrado en la AppBar de la página del contador"
     },
-    "DontYouHaveAnAccountYet?" : "No tienes una cuenta todavía?",
-    "do you already have an account?" : "Ya tienes una cuenta?",
+    "dontYouHaveAnAccountYet" : "No tienes una cuenta todavía?",
+    "doYouAlreadyHaveAnAccount" : "Ya tienes una cuenta?",
     "login": "Loggeo",
     "logout": "Cerrar sesión",
     "signinWithGoogle": "Iniciar sesión con Google",

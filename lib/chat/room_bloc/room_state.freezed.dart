@@ -21,7 +21,7 @@ mixin _$RoomState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
-    required TResult Function(Stream<QuerySnapshot<Object?>> messages)
+    required TResult Function(Stream<List<ChatMessage>> messages)
         messagesloaded,
     required TResult Function() failed,
   }) =>
@@ -31,7 +31,7 @@ mixin _$RoomState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ mixin _$RoomState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
     required TResult orElse(),
   }) =>
@@ -135,7 +135,7 @@ class _$RoomStateInitial implements RoomStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
-    required TResult Function(Stream<QuerySnapshot<Object?>> messages)
+    required TResult Function(Stream<List<ChatMessage>> messages)
         messagesloaded,
     required TResult Function() failed,
   }) {
@@ -148,7 +148,7 @@ class _$RoomStateInitial implements RoomStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
   }) {
     return initial?.call();
@@ -160,7 +160,7 @@ class _$RoomStateInitial implements RoomStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
     required TResult orElse(),
   }) {
@@ -260,7 +260,7 @@ class _$RoomStateLoading implements RoomStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
-    required TResult Function(Stream<QuerySnapshot<Object?>> messages)
+    required TResult Function(Stream<List<ChatMessage>> messages)
         messagesloaded,
     required TResult Function() failed,
   }) {
@@ -273,7 +273,7 @@ class _$RoomStateLoading implements RoomStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
   }) {
     return loading?.call();
@@ -285,7 +285,7 @@ class _$RoomStateLoading implements RoomStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
     required TResult orElse(),
   }) {
@@ -385,7 +385,7 @@ class _$RoomStateLoaded implements RoomStateLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
-    required TResult Function(Stream<QuerySnapshot<Object?>> messages)
+    required TResult Function(Stream<List<ChatMessage>> messages)
         messagesloaded,
     required TResult Function() failed,
   }) {
@@ -398,7 +398,7 @@ class _$RoomStateLoaded implements RoomStateLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
   }) {
     return loaded?.call();
@@ -410,7 +410,7 @@ class _$RoomStateLoaded implements RoomStateLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
     required TResult orElse(),
   }) {
@@ -472,7 +472,7 @@ abstract class _$$RoomStateMessaggesMessaggesLoadedCopyWith<$Res> {
           _$RoomStateMessaggesMessaggesLoaded value,
           $Res Function(_$RoomStateMessaggesMessaggesLoaded) then) =
       __$$RoomStateMessaggesMessaggesLoadedCopyWithImpl<$Res>;
-  $Res call({Stream<QuerySnapshot<Object?>> messages});
+  $Res call({Stream<List<ChatMessage>> messages});
 }
 
 /// @nodoc
@@ -496,7 +496,7 @@ class __$$RoomStateMessaggesMessaggesLoadedCopyWithImpl<$Res>
       messages: messages == freezed
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
-              as Stream<QuerySnapshot<Object?>>,
+              as Stream<List<ChatMessage>>,
     ));
   }
 }
@@ -508,7 +508,7 @@ class _$RoomStateMessaggesMessaggesLoaded
   const _$RoomStateMessaggesMessaggesLoaded({required this.messages});
 
   @override
-  final Stream<QuerySnapshot<Object?>> messages;
+  final Stream<List<ChatMessage>> messages;
 
   @override
   String toString() {
@@ -540,7 +540,7 @@ class _$RoomStateMessaggesMessaggesLoaded
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
-    required TResult Function(Stream<QuerySnapshot<Object?>> messages)
+    required TResult Function(Stream<List<ChatMessage>> messages)
         messagesloaded,
     required TResult Function() failed,
   }) {
@@ -553,7 +553,7 @@ class _$RoomStateMessaggesMessaggesLoaded
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
   }) {
     return messagesloaded?.call(messages);
@@ -565,7 +565,7 @@ class _$RoomStateMessaggesMessaggesLoaded
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
     required TResult orElse(),
   }) {
@@ -619,11 +619,10 @@ class _$RoomStateMessaggesMessaggesLoaded
 
 abstract class RoomStateMessaggesMessaggesLoaded implements RoomState {
   const factory RoomStateMessaggesMessaggesLoaded(
-          {required final Stream<QuerySnapshot<Object?>> messages}) =
+          {required final Stream<List<ChatMessage>> messages}) =
       _$RoomStateMessaggesMessaggesLoaded;
 
-  Stream<QuerySnapshot<Object?>> get messages =>
-      throw _privateConstructorUsedError;
+  Stream<List<ChatMessage>> get messages => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$RoomStateMessaggesMessaggesLoadedCopyWith<
           _$RoomStateMessaggesMessaggesLoaded>
@@ -674,7 +673,7 @@ class _$RoomStateFailed implements RoomStateFailed {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
-    required TResult Function(Stream<QuerySnapshot<Object?>> messages)
+    required TResult Function(Stream<List<ChatMessage>> messages)
         messagesloaded,
     required TResult Function() failed,
   }) {
@@ -687,7 +686,7 @@ class _$RoomStateFailed implements RoomStateFailed {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
   }) {
     return failed?.call();
@@ -699,7 +698,7 @@ class _$RoomStateFailed implements RoomStateFailed {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
-    TResult Function(Stream<QuerySnapshot<Object?>> messages)? messagesloaded,
+    TResult Function(Stream<List<ChatMessage>> messages)? messagesloaded,
     TResult Function()? failed,
     required TResult orElse(),
   }) {

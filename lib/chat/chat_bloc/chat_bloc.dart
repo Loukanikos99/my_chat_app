@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:chat_app_client/chat_app_client.dart';
+import 'package:chat_app_client/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:my_chat_app/chat/chat_bloc/chat_event.dart';
@@ -23,11 +24,13 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     Emitter<ChatState> emit,
   ) async {
     emit(const ChatState.loading());
-    final users = chatAppClient.getUsers(
+    final stream = chatAppClient.getUsers(
       'users',
       event.limit,
       event.textSearch,
     );
+    final users =
+        stream.map((qShot) => qShot.docs.map(User.fromDocument).toList());
     emit(ChatState.usersLoaded(users: users));
   }
 
@@ -37,11 +40,13 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ) async {
     emit(const ChatState.loading());
     try {
-      final users = chatAppClient.getUsersAlreadyInChat(
+      final stream = chatAppClient.getUsersAlreadyInChat(
         currentUserId!,
         event.limit,
         event.textSearch,
       );
+      final users =
+          stream.map((qShot) => qShot.docs.map(User.fromDocument).toList());
       emit(ChatState.usersLoaded(users: users));
     } catch (e) {
       emit(const ChatState.failed(''));

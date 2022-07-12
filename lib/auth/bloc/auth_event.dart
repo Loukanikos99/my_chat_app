@@ -9,12 +9,15 @@ class AuthEvent with _$AuthEvent {
     required String password,
   }) = AuthSignInEvent;
 
+  const factory AuthEvent.googleSignIn() = AuthGoogleSignInEvent;
+
   const factory AuthEvent.signOut() = AuthSignOutEvent;
 
   const factory AuthEvent.register({
     required String email,
     required String password,
     required String name,
-    String? picture,
   }) = AuthRegisterEvent;
+
+  const factory AuthEvent.getProfileImage() = AuthGetProfileImageEvent;
 }

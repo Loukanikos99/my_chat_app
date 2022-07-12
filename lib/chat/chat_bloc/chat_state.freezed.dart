@@ -20,7 +20,7 @@ mixin _$ChatState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Object?>> users) usersLoaded,
+    required TResult Function(Stream<List<User>> users) usersLoaded,
     required TResult Function(String errorMsg) failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$ChatState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Object?>> users)? usersLoaded,
+    TResult Function(Stream<List<User>> users)? usersLoaded,
     TResult Function(String errorMsg)? failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$ChatState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Object?>> users)? usersLoaded,
+    TResult Function(Stream<List<User>> users)? usersLoaded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) =>
@@ -126,7 +126,7 @@ class _$ChatStateInitial implements ChatStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Object?>> users) usersLoaded,
+    required TResult Function(Stream<List<User>> users) usersLoaded,
     required TResult Function(String errorMsg) failed,
   }) {
     return initial();
@@ -137,7 +137,7 @@ class _$ChatStateInitial implements ChatStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Object?>> users)? usersLoaded,
+    TResult Function(Stream<List<User>> users)? usersLoaded,
     TResult Function(String errorMsg)? failed,
   }) {
     return initial?.call();
@@ -148,7 +148,7 @@ class _$ChatStateInitial implements ChatStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Object?>> users)? usersLoaded,
+    TResult Function(Stream<List<User>> users)? usersLoaded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -243,7 +243,7 @@ class _$ChatStateLoading implements ChatStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Object?>> users) usersLoaded,
+    required TResult Function(Stream<List<User>> users) usersLoaded,
     required TResult Function(String errorMsg) failed,
   }) {
     return loading();
@@ -254,7 +254,7 @@ class _$ChatStateLoading implements ChatStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Object?>> users)? usersLoaded,
+    TResult Function(Stream<List<User>> users)? usersLoaded,
     TResult Function(String errorMsg)? failed,
   }) {
     return loading?.call();
@@ -265,7 +265,7 @@ class _$ChatStateLoading implements ChatStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Object?>> users)? usersLoaded,
+    TResult Function(Stream<List<User>> users)? usersLoaded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -322,7 +322,7 @@ abstract class _$$ChatStateUsersLoadedCopyWith<$Res> {
   factory _$$ChatStateUsersLoadedCopyWith(_$ChatStateUsersLoaded value,
           $Res Function(_$ChatStateUsersLoaded) then) =
       __$$ChatStateUsersLoadedCopyWithImpl<$Res>;
-  $Res call({Stream<QuerySnapshot<Object?>> users});
+  $Res call({Stream<List<User>> users});
 }
 
 /// @nodoc
@@ -344,7 +344,7 @@ class __$$ChatStateUsersLoadedCopyWithImpl<$Res>
       users: users == freezed
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
-              as Stream<QuerySnapshot<Object?>>,
+              as Stream<List<User>>,
     ));
   }
 }
@@ -355,7 +355,7 @@ class _$ChatStateUsersLoaded implements ChatStateUsersLoaded {
   const _$ChatStateUsersLoaded({required this.users});
 
   @override
-  final Stream<QuerySnapshot<Object?>> users;
+  final Stream<List<User>> users;
 
   @override
   String toString() {
@@ -385,7 +385,7 @@ class _$ChatStateUsersLoaded implements ChatStateUsersLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Object?>> users) usersLoaded,
+    required TResult Function(Stream<List<User>> users) usersLoaded,
     required TResult Function(String errorMsg) failed,
   }) {
     return usersLoaded(users);
@@ -396,7 +396,7 @@ class _$ChatStateUsersLoaded implements ChatStateUsersLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Object?>> users)? usersLoaded,
+    TResult Function(Stream<List<User>> users)? usersLoaded,
     TResult Function(String errorMsg)? failed,
   }) {
     return usersLoaded?.call(users);
@@ -407,7 +407,7 @@ class _$ChatStateUsersLoaded implements ChatStateUsersLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Object?>> users)? usersLoaded,
+    TResult Function(Stream<List<User>> users)? usersLoaded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -457,11 +457,9 @@ class _$ChatStateUsersLoaded implements ChatStateUsersLoaded {
 
 abstract class ChatStateUsersLoaded implements ChatState {
   const factory ChatStateUsersLoaded(
-          {required final Stream<QuerySnapshot<Object?>> users}) =
-      _$ChatStateUsersLoaded;
+      {required final Stream<List<User>> users}) = _$ChatStateUsersLoaded;
 
-  Stream<QuerySnapshot<Object?>> get users =>
-      throw _privateConstructorUsedError;
+  Stream<List<User>> get users => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$ChatStateUsersLoadedCopyWith<_$ChatStateUsersLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -534,7 +532,7 @@ class _$ChatStateFailed implements ChatStateFailed {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Object?>> users) usersLoaded,
+    required TResult Function(Stream<List<User>> users) usersLoaded,
     required TResult Function(String errorMsg) failed,
   }) {
     return failed(errorMsg);
@@ -545,7 +543,7 @@ class _$ChatStateFailed implements ChatStateFailed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Object?>> users)? usersLoaded,
+    TResult Function(Stream<List<User>> users)? usersLoaded,
     TResult Function(String errorMsg)? failed,
   }) {
     return failed?.call(errorMsg);
@@ -556,7 +554,7 @@ class _$ChatStateFailed implements ChatStateFailed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Object?>> users)? usersLoaded,
+    TResult Function(Stream<List<User>> users)? usersLoaded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {

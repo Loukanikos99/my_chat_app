@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:chat_app_client/chat_app_client.dart';
+import 'package:chat_app_client/models/chat_messaging_model.dart';
 import 'package:chat_app_client/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
@@ -27,8 +28,6 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
   final User? otherUser;
 
   String groupChatId = '';
-
-  String imageUrl = '';
 
   File? imageFile;
 
@@ -64,7 +63,6 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
           currentUserId!,
           otherUser?.id ?? '',
         );
-        // TODO Queckear si es la mejor manera de traer los mensajes.
         add(const RoomEvent.getChatMessage(limit: 20));
       } catch (e) {
         emit(const RoomState.failed());
@@ -84,10 +82,12 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     emit(const RoomState.loading());
     try {
       await _readLocal();
-      final messages = chatAppClient.getChatMessage(
+      final stream = chatAppClient.getChatMessage(
         groupChatId,
         event.limit,
       );
+      final messages = stream
+          .map((qShot) => qShot.docs.map(ChatMessage.fromDocument).toList());
       emit(RoomState.messagesloaded(messages: messages));
     } catch (e) {
       emit(const RoomState.failed());
@@ -141,8 +141,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
 
     final uploadTask = _uploadImageFile(imageFile!, fileName);
     try {
-      final snapshot = await uploadTask;
-      imageUrl = await snapshot.ref.getDownloadURL();
+      final imageUrl = await uploadTask.snapshot.ref.getDownloadURL();
       add(RoomSendMessageEvent(content: imageUrl, type: MessageType.image));
     } on FirebaseException catch (e) {
       await Fluttertoast.showToast(msg: e.message ?? e.toString());

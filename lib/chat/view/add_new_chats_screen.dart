@@ -1,15 +1,14 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chat_app_client/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 import 'package:my_chat_app/chat/chat_bloc/chat_bloc.dart';
 import 'package:my_chat_app/chat/chat_bloc/chat_event.dart';
 import 'package:my_chat_app/chat/chat_bloc/chat_state.dart';
-import 'package:my_chat_app/chat/widgets/chat_screens_widget/chat_search_bar_widget.dart';
-import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tile_add_new_screen_widget.dart';
-import 'package:my_chat_app/chat/widgets/chat_screens_widget/list_tile_empty_widget.dart';
+import 'package:my_chat_app/chat/widgets/chat_screens_widget/widgets_chat_screens.dart';
+import 'package:my_chat_app/resources/text_styles.dart';
 
 class AddNewChatsScreen extends StatefulWidget {
   const AddNewChatsScreen({super.key});
@@ -22,7 +21,7 @@ class _AddNewChatsScreenState extends State<AddNewChatsScreen> {
   @override
   void initState() {
     context.read<ChatBloc>().add(
-          const ChatEvent.getUsers(limit: 20),
+          ChatEvent.getUsers(limit: 20, textSearch: _textSearch),
         );
     super.initState();
   }
@@ -40,12 +39,13 @@ class _AddNewChatsScreenState extends State<AddNewChatsScreen> {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Chats',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          style: TextStyles.h1(context),
         ),
         centerTitle: false,
         backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -90,56 +90,58 @@ class _AddNewChatsScreenState extends State<AddNewChatsScreen> {
                     : const SizedBox.shrink();
               },
             ),
-            Expanded(
-              child: BlocBuilder<ChatBloc, ChatState>(
-                builder: (BuildContext context, state) {
-                  return state.maybeWhen(
-                    usersLoaded: (users) => StreamBuilder<QuerySnapshot>(
-                      // TODO:
-                      // En su debido tiempo cambiar el limite para que sea paginado.
-                      stream: users,
-                      builder: (
-                        BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot,
-                      ) {
-                        if (snapshot.hasData) {
-                          if ((snapshot.data?.docs.length ?? 0) > 0) {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.docs.length,
-                              itemBuilder: (context, index) =>
-                                  ListTileAddNewScreenWidget(
-                                documentSnapshot: snapshot.data?.docs[index],
-                              ),
-                              separatorBuilder:
-                                  (BuildContext context, int index) =>
-                                      const Divider(),
-                            );
-                          } else {
-                            return const Center(
-                              child: Text('No user found...'),
-                            );
-                          }
-                        } else {
-                          return Column(
-                            children: List.generate(
-                              5,
-                              (index) => const ListTileEmptyWidget(),
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                    orElse: () {
-                      return Container();
-                    },
-                  );
-                },
-              ),
-            ),
+            const ChatsListWidget(),
             SizedBox(height: screenSize.height * 0.05),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ChatsListWidget extends StatelessWidget {
+  const ChatsListWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: BlocBuilder<ChatBloc, ChatState>(
+        builder: (BuildContext context, state) {
+          return state.maybeWhen(
+            orElse: Container.new,
+            loading: () => Column(
+              children: List.generate(
+                5,
+                (index) => const ListTileEmptyWidget(),
+              ),
+            ),
+            usersLoaded: (users) => StreamBuilder<List<User>>(
+              stream: users,
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<List<User>> snapshot,
+              ) {
+                if ((snapshot.data?.length ?? 0) > 0) {
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) => ListTileAddNewScreenWidget(
+                      user: snapshot.data![index],
+                    ),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
+                  );
+                } else {
+                  return const Center(
+                    child: Text('No user found...'),
+                  );
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }

@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:chat_app_client/src/chat_app_client.dart';
 import 'package:test/test.dart';
-import '../../lib/src/chat_app_client.dart';
 
 void main() {
   group('ChatAppClient', () {
