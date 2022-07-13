@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:chat_app_client/models/user_model.dart';
+import 'package:chat_client_service/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
@@ -8,6 +8,7 @@ import 'package:my_chat_app/chat/chat_bloc/chat_bloc.dart';
 import 'package:my_chat_app/chat/chat_bloc/chat_event.dart';
 import 'package:my_chat_app/chat/chat_bloc/chat_state.dart';
 import 'package:my_chat_app/chat/widgets/chat_screens_widget/widgets_chat_screens.dart';
+import 'package:my_chat_app/l10n/l10n.dart';
 import 'package:my_chat_app/resources/text_styles.dart';
 
 class AddNewChatsScreen extends StatefulWidget {
@@ -106,6 +107,7 @@ class ChatsListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Expanded(
       child: BlocBuilder<ChatBloc, ChatState>(
         builder: (BuildContext context, state) {
@@ -134,8 +136,8 @@ class ChatsListWidget extends StatelessWidget {
                         const Divider(),
                   );
                 } else {
-                  return const Center(
-                    child: Text('No user found...'),
+                  return Center(
+                    child: Text(l10n.userNotFound),
                   );
                 }
               },

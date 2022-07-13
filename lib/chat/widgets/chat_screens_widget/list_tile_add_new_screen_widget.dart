@@ -1,5 +1,5 @@
-import 'package:chat_app_client/chat_app_client.dart';
-import 'package:chat_app_client/models/user_model.dart';
+import 'package:chat_client_repository/chat_app_client.dart';
+import 'package:chat_client_service/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
@@ -22,7 +22,8 @@ class ListTileAddNewScreenWidget extends StatelessWidget {
             builder: (context) => BlocProvider(
               create: (context) => RoomBloc(
                 otherUser: user,
-                chatAppClient: ChatAppClient(),
+                chatClientRepo:
+                    RepositoryProvider.of<ChatClientRepository>(context),
               ),
               child: const RoomScreen(),
             ),

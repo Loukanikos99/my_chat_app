@@ -1,4 +1,4 @@
-import 'package:chat_app_client/models/chat_messaging_model.dart';
+import 'package:chat_client_repository/models/chat_messaging_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +7,7 @@ import 'package:my_chat_app/chat/room_bloc/room_event.dart';
 import 'package:my_chat_app/chat/room_bloc/room_state.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/loading_body_room_widget.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/room_widgets.dart';
+import 'package:my_chat_app/l10n/l10n.dart';
 
 class BodyRoomScreenWidget extends StatefulWidget {
   const BodyRoomScreenWidget({super.key});
@@ -44,6 +45,7 @@ class _BodyRoomScreenWidgetState extends State<BodyRoomScreenWidget> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final l10n = context.l10n;
     return Container(
       height: screenSize.height * 0.78,
       width: screenSize.width,
@@ -101,8 +103,8 @@ class _BodyRoomScreenWidgetState extends State<BodyRoomScreenWidget> {
                     },
                   );
                 } else {
-                  return const Center(
-                    child: Text('Sin mensajes...'),
+                  return Center(
+                    child: Text(l10n.noMessagges),
                   );
                 }
               },

@@ -44,7 +44,7 @@ mixin _$AuthState {
     required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
-    required TResult Function(String errorMsg) failed,
+    required TResult Function() failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +54,7 @@ mixin _$AuthState {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,7 +64,7 @@ mixin _$AuthState {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -171,7 +171,7 @@ class _$AuthStateInitial implements AuthStateInitial {
     required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
-    required TResult Function(String errorMsg) failed,
+    required TResult Function() failed,
   }) {
     return initial();
   }
@@ -184,7 +184,7 @@ class _$AuthStateInitial implements AuthStateInitial {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
   }) {
     return initial?.call();
   }
@@ -197,7 +197,7 @@ class _$AuthStateInitial implements AuthStateInitial {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -316,7 +316,7 @@ class _$AuthStateLoading implements AuthStateLoading {
     required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
-    required TResult Function(String errorMsg) failed,
+    required TResult Function() failed,
   }) {
     return loading();
   }
@@ -329,7 +329,7 @@ class _$AuthStateLoading implements AuthStateLoading {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
   }) {
     return loading?.call();
   }
@@ -342,7 +342,7 @@ class _$AuthStateLoading implements AuthStateLoading {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -492,7 +492,7 @@ class _$AuthStateLoadedProfileImage implements AuthStateLoadedProfileImage {
     required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
-    required TResult Function(String errorMsg) failed,
+    required TResult Function() failed,
   }) {
     return loadedProfileImage(imageFilePath);
   }
@@ -505,7 +505,7 @@ class _$AuthStateLoadedProfileImage implements AuthStateLoadedProfileImage {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
   }) {
     return loadedProfileImage?.call(imageFilePath);
   }
@@ -518,7 +518,7 @@ class _$AuthStateLoadedProfileImage implements AuthStateLoadedProfileImage {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
     required TResult orElse(),
   }) {
     if (loadedProfileImage != null) {
@@ -670,7 +670,7 @@ class _$AuthStateAuthenticated implements AuthStateAuthenticated {
     required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
-    required TResult Function(String errorMsg) failed,
+    required TResult Function() failed,
   }) {
     return authenticated(user);
   }
@@ -683,7 +683,7 @@ class _$AuthStateAuthenticated implements AuthStateAuthenticated {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
   }) {
     return authenticated?.call(user);
   }
@@ -696,7 +696,7 @@ class _$AuthStateAuthenticated implements AuthStateAuthenticated {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -824,7 +824,7 @@ class _$AuthStateUnauthenticated implements AuthStateUnauthenticated {
     required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
-    required TResult Function(String errorMsg) failed,
+    required TResult Function() failed,
   }) {
     return unauthenticated();
   }
@@ -837,7 +837,7 @@ class _$AuthStateUnauthenticated implements AuthStateUnauthenticated {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
   }) {
     return unauthenticated?.call();
   }
@@ -850,7 +850,7 @@ class _$AuthStateUnauthenticated implements AuthStateUnauthenticated {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -921,7 +921,6 @@ abstract class _$$AuthStateFailedCopyWith<$Res> {
   factory _$$AuthStateFailedCopyWith(
           _$AuthStateFailed value, $Res Function(_$AuthStateFailed) then) =
       __$$AuthStateFailedCopyWithImpl<$Res>;
-  $Res call({String errorMsg});
 }
 
 /// @nodoc
@@ -934,57 +933,33 @@ class __$$AuthStateFailedCopyWithImpl<$Res>
 
   @override
   _$AuthStateFailed get _value => super._value as _$AuthStateFailed;
-
-  @override
-  $Res call({
-    Object? errorMsg = freezed,
-  }) {
-    return _then(_$AuthStateFailed(
-      errorMsg == freezed
-          ? _value.errorMsg
-          : errorMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AuthStateFailed implements AuthStateFailed {
-  const _$AuthStateFailed(this.errorMsg, {final String? $type})
-      : $type = $type ?? 'failed';
+  const _$AuthStateFailed({final String? $type}) : $type = $type ?? 'failed';
 
   factory _$AuthStateFailed.fromJson(Map<String, dynamic> json) =>
       _$$AuthStateFailedFromJson(json);
-
-  @override
-  final String errorMsg;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'AuthState.failed(errorMsg: $errorMsg)';
+    return 'AuthState.failed()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthStateFailed &&
-            const DeepCollectionEquality().equals(other.errorMsg, errorMsg));
+        (other.runtimeType == runtimeType && other is _$AuthStateFailed);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(errorMsg));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$AuthStateFailedCopyWith<_$AuthStateFailed> get copyWith =>
-      __$$AuthStateFailedCopyWithImpl<_$AuthStateFailed>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -994,9 +969,9 @@ class _$AuthStateFailed implements AuthStateFailed {
     required TResult Function(String imageFilePath) loadedProfileImage,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
-    required TResult Function(String errorMsg) failed,
+    required TResult Function() failed,
   }) {
-    return failed(errorMsg);
+    return failed();
   }
 
   @override
@@ -1007,9 +982,9 @@ class _$AuthStateFailed implements AuthStateFailed {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
   }) {
-    return failed?.call(errorMsg);
+    return failed?.call();
   }
 
   @override
@@ -1020,11 +995,11 @@ class _$AuthStateFailed implements AuthStateFailed {
     TResult Function(String imageFilePath)? loadedProfileImage,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
-    TResult Function(String errorMsg)? failed,
+    TResult Function()? failed,
     required TResult orElse(),
   }) {
     if (failed != null) {
-      return failed(errorMsg);
+      return failed();
     }
     return orElse();
   }
@@ -1080,13 +1055,8 @@ class _$AuthStateFailed implements AuthStateFailed {
 }
 
 abstract class AuthStateFailed implements AuthState {
-  const factory AuthStateFailed(final String errorMsg) = _$AuthStateFailed;
+  const factory AuthStateFailed() = _$AuthStateFailed;
 
   factory AuthStateFailed.fromJson(Map<String, dynamic> json) =
       _$AuthStateFailed.fromJson;
-
-  String get errorMsg => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$AuthStateFailedCopyWith<_$AuthStateFailed> get copyWith =>
-      throw _privateConstructorUsedError;
 }

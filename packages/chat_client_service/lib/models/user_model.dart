@@ -7,12 +7,10 @@ class User {
 
   /// Tries to convert the data from the DB to a [User].
   User.fromJson(Map<String, dynamic> json) {
-    try {
-      picture = json['picture'] as String?;
-      id = json['id'] as String;
-      name = json['name'] as String;
-      email = json['email'] as String;
-    } catch (e) {}
+    picture = json['picture'] as String?;
+    id = json['id'] as String;
+    name = json['name'] as String;
+    email = json['email'] as String;
   }
 
   /// Converts the [User] to a [Map]
@@ -20,10 +18,9 @@ class User {
     String? name = '';
     String? picture = '';
 
-    try {
-      name = snapshot.get('name') as String;
-      picture = snapshot.get('picture') as String?;
-    } catch (e) {}
+    name = snapshot.get('name') as String;
+    picture = snapshot.get('picture') as String?;
+
     return User(
       id: snapshot.id,
       picture: picture,
@@ -31,9 +28,16 @@ class User {
     );
   }
 
+  /// Identifier of the User
   String? id;
+
+  /// Name of the User
   String? name;
+
+  /// Email of the User
   String? email;
+
+  /// Profile picture of the User
   String? picture;
 
   /// Converts the [User] to a [Map]

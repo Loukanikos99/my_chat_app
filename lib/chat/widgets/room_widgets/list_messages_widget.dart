@@ -1,4 +1,4 @@
-import 'package:chat_app_client/models/chat_messaging_model.dart';
+import 'package:chat_client_repository/models/chat_messaging_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';

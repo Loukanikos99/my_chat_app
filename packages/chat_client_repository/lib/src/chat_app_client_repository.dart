@@ -1,162 +1,157 @@
-import 'dart:developer';
-
-import 'package:chat_app_client/constants/firestore_constants.dart';
-import 'package:chat_app_client/models/chat_messaging_model.dart';
-import 'package:chat_app_client/models/user_model.dart';
-import 'package:chat_app_client/src/chat_app_client_base.dart';
-import 'package:chat_app_client/src/exceptions.dart';
+import 'package:chat_client_repository/models/chat_messaging_model.dart';
+import 'package:chat_client_repository/src/chat_client_repository_base.dart';
+import 'package:chat_client_repository/src/failures/chat_client_repository_failures.dart';
+import 'package:chat_client_service/chat_client_service.dart';
+import 'package:chat_client_service/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:fluttertoast/fluttertoast.dart';
 
 /// {@template chat_app_client}
-/// A Very Good Project created by Very Good CLI.
 /// {@endtemplate}
-class ChatAppClient with ChatAppClientBase {
+class ChatClientRepository with ChatClientRepositoryBase {
   /// {@macro chat_app_client}
-  ChatAppClient() : _firebaseAuth = auth.FirebaseAuth.instance;
+  ChatClientRepository({required this.chatClientService})
+      : _firebaseAuth = auth.FirebaseAuth.instance;
 
   final auth.FirebaseAuth _firebaseAuth;
 
+  /// ChatClientService contains all the methods to comunicate with Firebase.
+  final ChatClientService chatClientService;
+
   @override
-  Future<User?> login(String email, String password) async {
+  Future<Either<ChatClientRepositoryFailures, User>> login(
+    String email,
+    String password,
+  ) async {
     try {
       final userData = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password)
           .timeout(const Duration(seconds: 15));
-      return await getUserInfo(userData.user!.uid);
-    } on auth.FirebaseAuthException catch (error, stackTrace) {
-      log(
-        error.message.toString(),
-        time: DateTime.now(),
-        error: error,
-        stackTrace: stackTrace,
-      );
 
-      await Fluttertoast.showToast(msg: 'Credenciales inválidas.');
+      final eitherUser =
+          await chatClientService.getUserInfo(userData.user!.uid);
 
+      if (eitherUser.isLeft()) {
+        final failure =
+            (eitherUser as Left<ChatClientServiceFailures, User>).value;
+        return Left(ChatClientRepositoryFailures.serviceFailure(failure));
+      }
+
+      final user = (eitherUser as Right<ChatClientServiceFailures, User>).value;
+
+      return Right(user);
+    } on auth.FirebaseAuthException catch (error) {
       if (error.code == 'user-not-found' ||
           error.code == 'wrong-password' ||
           error.code == 'invalid-email') {
-        throw WrongAuthCredentials();
+        return const Left(ChatClientRepositoryFailures.badCredentials());
       }
 
       rethrow;
-    } catch (error, stackTrace) {
-      await Fluttertoast.showToast(msg: 'Ha ocurrido un error inesperado.');
-      log(
-        error.toString(),
-        time: DateTime.now(),
-        error: error,
-        stackTrace: stackTrace,
-      );
-
-      rethrow;
+    } catch (_) {
+      return const Left(ChatClientRepositoryFailures.unknown());
     }
   }
 
   @override
-  Future<User?> loginFirebaseGoogle({
+  Future<Either<ChatClientRepositoryFailures, User>> loginFirebaseGoogle({
     required String token,
   }) async {
+    auth.UserCredential userCred;
+
     try {
-      User? user;
       final auth.AuthCredential credential =
           auth.GoogleAuthProvider.credential(accessToken: token);
-      final userCred = await auth.FirebaseAuth.instance.signInWithCredential(
+
+      userCred = await auth.FirebaseAuth.instance.signInWithCredential(
         credential,
       );
-
-      user = await getUserInfo(userCred.user?.uid ?? '');
-      if (user != null) {
-        return user;
-      } else {
-        user = User(
-          id: userCred.user?.uid,
-          email: userCred.user?.email,
-          name: userCred.user?.displayName,
-          picture: userCred.user?.photoURL,
-        );
-        await updateOrRegister(user: user);
-      }
     } catch (e) {
-      await Fluttertoast.showToast(
-        msg: 'No se a podido loggear correctamente.',
-      );
+      return const Left(ChatClientRepositoryFailures.googleCredentials());
     }
-    return null;
+
+    final eitherUser =
+        await chatClientService.getUserInfo(userCred.user?.uid ?? '');
+
+    if (eitherUser.isRight()) {
+      final user = (eitherUser as Right<ChatClientServiceFailures, User>).value;
+      return Right(user);
+    }
+
+    final user = User(
+      id: userCred.user?.uid,
+      email: userCred.user?.email,
+      name: userCred.user?.displayName,
+      picture: userCred.user?.photoURL,
+    );
+
+    try {
+      final eitherRegister =
+          await chatClientService.updateOrRegister(user: user);
+      if (eitherRegister.isRight()) {
+        return Right(user);
+      }
+
+      final failure =
+          (eitherUser as Left<ChatClientServiceFailures, User>).value;
+
+      return Left(ChatClientRepositoryFailures.serviceFailure(failure));
+    } catch (_) {
+      return const Left(ChatClientRepositoryFailures.unknown());
+    }
   }
 
-  /// Registrar un usuario en la base de datos de firestore
-  /// Tener en cuenta que este metodo tambien registra al
-  /// usuario en el Authentication de Firebase
-  Future<User?> registerFirebase({
+  @override
+  Future<Either<ChatClientRepositoryFailures, User>> registerFirebase({
     required String name,
     required String email,
     required String password,
     String? picture,
   }) async {
+    auth.UserCredential? userData;
     try {
-      /// Esto es lo que realmente verifica si el usuario está o no registrado
-      /// Si está registrado sale error
-      final userData = await auth.FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+      try {
+        /// Tries to create a new user.
+        userData = await auth.FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+      } catch (_) {
+        return const Left(ChatClientRepositoryFailures.register());
+      }
 
-      /// Creamos un objeto User para instanciarlo
-      /// con los pocos datos que tenemos
-      /// Luego hacemos la insercion en Firestore
-      final user = User();
-      user
-        ..id = userData.user!.uid
-        ..email = email
-        ..name = name
-        ..picture = picture;
+      /// Create a User object to instantiate it
+      /// with the little data we have
+      /// Then we do the insert in Firestore
+      final user = User(
+        id: userData.user?.uid,
+        email: email,
+        name: name,
+        picture: picture,
+      );
+      final eitherRegister =
+          await chatClientService.updateOrRegister(user: user);
 
-      await updateOrRegister(user: user);
-      return user;
-    } catch (e) {
-      rethrow;
-    }
-  }
+      if (eitherRegister.isRight()) {
+        return Right(user);
+      }
 
-  /// Actualizar o registrar un usuario en Firestore
-  Future<bool> updateOrRegister({required User user}) async {
-    try {
-      await firebaseFirestore.doc('users/${user.id!}').set(user.toJson());
-      return true;
-    } catch (e) {
-      return false;
+      final failure =
+          (eitherRegister as Left<ChatClientServiceFailures, User>).value;
+
+      return Left(ChatClientRepositoryFailures.serviceFailure(failure));
+    } catch (_) {
+      return const Left(ChatClientRepositoryFailures.unknown());
     }
   }
 
   @override
-  Future<void> signOut() async {
+  Future<Either<ChatClientRepositoryFailures, bool>> signOut() async {
     try {
       await _firebaseAuth.signOut().timeout(const Duration(seconds: 15));
-    } catch (error, stackTrace) {
-      log(
-        error.toString(),
-        time: DateTime.now(),
-        error: error,
-        stackTrace: stackTrace,
-      );
-
-      rethrow;
+      return const Right(true);
+    } catch (error) {
+      return const Left(ChatClientRepositoryFailures.couldntsignout());
     }
-  }
-
-  @override
-  Future<User?> getUserInfo(String id) async {
-    try {
-      final data = await firebaseFirestore.doc('users/$id').get();
-
-      if (data.exists) {
-        return User.fromJson(data.data()!);
-      }
-    } catch (e) {
-      rethrow;
-    }
-    return null;
   }
 
   @override
@@ -184,12 +179,11 @@ class ChatAppClient with ChatAppClientBase {
 
   @override
   Future<void> updateFirestoreData(
-    String collectionPath,
     String docPath,
     Map<String, dynamic> dataUpdate,
   ) {
     return firebaseFirestore
-        .collection(collectionPath)
+        .collection(FirestoreConstants.pathUserCollection)
         .doc(docPath)
         .update(dataUpdate);
   }

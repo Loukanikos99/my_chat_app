@@ -1,25 +1,38 @@
-import 'package:chat_app_client/models/chat_messaging_model.dart';
-import 'package:chat_app_client/models/user_model.dart';
+import 'package:chat_client_repository/models/chat_messaging_model.dart';
+import 'package:chat_client_repository/src/failures/chat_client_repository_failures.dart';
+import 'package:chat_client_service/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:dartz/dartz.dart';
 
-/// ChatRepositoryBase is the mixin of all de request
+/// ChatClientRepositorytBase is the mixin of all the request
 /// for the chat_app.
-mixin ChatAppClientBase {
+mixin ChatClientRepositoryBase {
   /// Returns an instance using the default FirebaseApp.
   final firebaseFirestore = FirebaseFirestore.instance;
 
   /// Trais to login with the given credentials.
-  Future<User?> login(String email, String password);
+  Future<Either<ChatClientRepositoryFailures, User>> login(
+    String email,
+    String password,
+  );
 
   ///Trais to login with a token using GoogleSignIn.
-  Future<User?> loginFirebaseGoogle({required String token});
+  Future<Either<ChatClientRepositoryFailures, User>> loginFirebaseGoogle({
+    required String token,
+  });
+
+  /// Tries to register a user in the firestore database
+  /// Note that this method also registers the
+  /// user in Firebase Authentication
+  Future<Either<ChatClientRepositoryFailures, User>> registerFirebase({
+    required String name,
+    required String email,
+    required String password,
+    String? picture,
+  });
 
   /// Trais to logout the current user.
-  Future<void> signOut();
-
-  /// Trais to take the User data from FireStore.
-  Future<User?> getUserInfo(String id);
+  Future<Either<ChatClientRepositoryFailures, void>> signOut();
 
   /// Trais to get a list of users from FireStore.
   Stream<QuerySnapshot> getUsers(
@@ -38,7 +51,6 @@ mixin ChatAppClientBase {
 
   /// Trais to update the data from a chat already started
   Future<void> updateFirestoreData(
-    String collectionPath,
     String docPath,
     Map<String, dynamic> dataUpdate,
   );

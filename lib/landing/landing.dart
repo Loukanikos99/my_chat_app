@@ -1,4 +1,4 @@
-import 'package:chat_app_client/chat_app_client.dart';
+import 'package:chat_client_repository/chat_app_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_chat_app/auth/bloc/auth_bloc.dart';
@@ -17,7 +17,8 @@ class LandingPage extends StatelessWidget {
         return state.maybeWhen(
           authenticated: (user) => BlocProvider(
             create: (context) => ChatBloc(
-              chatAppClient: ChatAppClient(),
+              chatClientRepo:
+                  RepositoryProvider.of<ChatClientRepository>(context),
             ),
             child: const ChatScreen(),
           ),

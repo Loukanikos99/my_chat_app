@@ -1,4 +1,4 @@
-import 'package:chat_app_client/models/user_model.dart';
+import 'package:chat_client_service/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_chat_app/chat/constants/common_widgets.dart';

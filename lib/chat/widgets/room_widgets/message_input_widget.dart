@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
 import 'package:my_chat_app/chat/room_bloc/room_event.dart';
 import 'package:my_chat_app/chat/room_bloc/room_state.dart';
+import 'package:my_chat_app/l10n/l10n.dart';
 
 class MessageInputWidget extends StatelessWidget {
   MessageInputWidget({
@@ -28,6 +29,7 @@ class MessageInputWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final l10n = context.l10n;
     return BlocBuilder<RoomBloc, RoomState>(
       builder: (context, state) {
         return Container(
@@ -68,8 +70,8 @@ class MessageInputWidget extends StatelessWidget {
                       textInputAction: TextInputAction.send,
                       textCapitalization: TextCapitalization.sentences,
                       controller: controller,
-                      decoration: const InputDecoration(
-                        hintText: 'Escribir algo ..',
+                      decoration: InputDecoration(
+                        hintText: l10n.writeSomething,
                       ),
                       onSubmitted: (_) => _onSubmit(context),
                     ),

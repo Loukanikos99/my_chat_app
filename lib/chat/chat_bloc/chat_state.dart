@@ -1,4 +1,4 @@
-import 'package:chat_app_client/models/user_model.dart';
+import 'package:chat_client_service/models/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chat_state.freezed.dart';

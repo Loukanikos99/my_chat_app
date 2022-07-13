@@ -68,12 +68,10 @@ Map<String, dynamic> _$$AuthStateUnauthenticatedToJson(
 
 _$AuthStateFailed _$$AuthStateFailedFromJson(Map<String, dynamic> json) =>
     _$AuthStateFailed(
-      json['errorMsg'] as String,
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$AuthStateFailedToJson(_$AuthStateFailed instance) =>
     <String, dynamic>{
-      'errorMsg': instance.errorMsg,
       'runtimeType': instance.$type,
     };

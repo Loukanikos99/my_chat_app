@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_chat_app/l10n/l10n.dart';
 
 class ChatSearchBarWidget extends StatelessWidget {
   const ChatSearchBarWidget({
@@ -13,6 +14,7 @@ class ChatSearchBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final l10n = context.l10n;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
@@ -31,8 +33,8 @@ class ChatSearchBarWidget extends StatelessWidget {
                 width: screenSize.width * 0.7,
                 child: TextField(
                   controller: controller,
-                  decoration: const InputDecoration(
-                    hintText: 'Buscar un chat',
+                  decoration: InputDecoration(
+                    hintText: l10n.searchForAChat,
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,

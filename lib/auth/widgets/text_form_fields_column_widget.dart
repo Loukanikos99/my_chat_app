@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_chat_app/l10n/l10n.dart';
 import 'package:my_chat_app/resources/text_styles.dart';
 
 class TextFormFieldsColumnWidget extends StatelessWidget {
@@ -36,6 +37,7 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final l10n = context.l10n;
 
     return SizedBox(
       width: kIsWeb ? 400 : size.width * 0.8,
@@ -59,11 +61,11 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
                     borderSide: BorderSide(color: Colors.grey, width: 5),
                   ),
                   errorStyle: const TextStyle(fontSize: 10),
-                  labelText: 'Nombre completo',
+                  labelText: l10n.fullName,
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Este campo es obligatorio';
+                    return l10n.thisFieldIsRequired;
                   }
                   return null;
                 },
@@ -81,10 +83,10 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
                   color: Colors.grey[400],
                 ),
                 border: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 5.0),
+                  borderSide: BorderSide(color: Colors.grey, width: 5),
                 ),
                 errorStyle: const TextStyle(fontSize: 10),
-                labelText: 'Correo electrónico',
+                labelText: l10n.email,
               ),
               validator: (value) {
                 const pattern =
@@ -93,7 +95,7 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
                     r'{0,253}[a-zA-Z0-9])?)*$';
                 final regex = RegExp(pattern);
                 if (value == null || value.isEmpty) {
-                  return 'Este campo es obligatorio';
+                  return l10n.thisFieldIsRequired;
                 }
                 if (!regex.hasMatch(value)) {
                   return 'error';
@@ -113,14 +115,14 @@ class TextFormFieldsColumnWidget extends StatelessWidget {
                   color: Colors.grey[400],
                 ),
                 errorStyle: const TextStyle(fontSize: 10),
-                labelText: 'Password',
+                labelText: l10n.password,
                 border: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 5.0),
+                  borderSide: BorderSide(color: Colors.grey, width: 5),
                 ),
               ),
               validator: (value) {
                 if (value == '') {
-                  return 'Este campo es requerido';
+                  return l10n.thisFieldIsRequired;
                 }
                 return null;
               },

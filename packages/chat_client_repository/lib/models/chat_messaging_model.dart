@@ -1,4 +1,4 @@
-import 'package:chat_app_client/constants/firestore_constants.dart';
+import 'package:chat_client_service/constants/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// ChatMessages is the model of the messages from chat.

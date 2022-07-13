@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_chat_app/auth/bloc/auth_bloc.dart';
 import 'package:my_chat_app/auth/bloc/auth_event.dart';
+import 'package:my_chat_app/l10n/l10n.dart';
 import 'package:my_chat_app/resources/text_styles.dart';
 
 class GoogleSignInButtonWidget extends StatelessWidget {
@@ -12,6 +13,7 @@ class GoogleSignInButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return GestureDetector(
       onTap: () => context.read<AuthBloc>().add(const AuthEvent.googleSignIn()),
       child: Container(
@@ -27,7 +29,7 @@ class GoogleSignInButtonWidget extends StatelessWidget {
           children: [
             const FaIcon(FontAwesomeIcons.google),
             Text(
-              'Iniciar Sesión con Google',
+              l10n.signinWithGoogle,
               style: TextStyles.sH2(context),
             )
           ],

@@ -1,6 +1,6 @@
-import 'package:chat_app_client/chat_app_client.dart';
-import 'package:chat_app_client/models/chat_messaging_model.dart';
-import 'package:chat_app_client/models/user_model.dart';
+import 'package:chat_client_repository/chat_app_client.dart';
+import 'package:chat_client_repository/models/chat_messaging_model.dart';
+import 'package:chat_client_service/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +9,7 @@ import 'package:my_chat_app/chat/room_bloc/room_event.dart';
 import 'package:my_chat_app/chat/room_bloc/room_state.dart';
 import 'package:my_chat_app/chat/view/room_screen.dart';
 import 'package:my_chat_app/chat/widgets/chat_screens_widget/widgets_chat_screens.dart';
+import 'package:my_chat_app/l10n/l10n.dart';
 
 class ListTileChatScreenWidget extends StatefulWidget {
   const ListTileChatScreenWidget({
@@ -36,6 +37,7 @@ class _ListTileChatScreenWidgetState extends State<ListTileChatScreenWidget> {
     final currentUserId = context.read<RoomBloc>().currentUserId;
 
     final screenSize = MediaQuery.of(context).size;
+    final l10n = context.l10n;
 
     return BlocBuilder<RoomBloc, RoomState>(
       builder: (BuildContext context, state) {
@@ -65,7 +67,10 @@ class _ListTileChatScreenWidgetState extends State<ListTileChatScreenWidget> {
                       MaterialPageRoute<dynamic>(
                         builder: (context) => BlocProvider(
                           create: (context) => RoomBloc(
-                            chatAppClient: ChatAppClient(),
+                            chatClientRepo:
+                                RepositoryProvider.of<ChatClientRepository>(
+                              context,
+                            ),
                             otherUser: user,
                           ),
                           child: const RoomScreen(),
@@ -98,7 +103,7 @@ class _ListTileChatScreenWidgetState extends State<ListTileChatScreenWidget> {
                                           .substring(0, 25),
                                 )
                               else
-                                const Text('Te han enviado una imagen')
+                                Text(l10n.youHaveBeenSentAPicture)
                             ],
                           ),
                           const Spacer(),

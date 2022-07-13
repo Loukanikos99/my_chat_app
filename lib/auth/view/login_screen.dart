@@ -31,7 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
               password: _password,
               email: _email,
             ),
-            SignInButtonWidget(password: _password, email: _email),
+            SignInButtonWidget(
+              formKey: _formKey,
+              password: _password,
+              email: _email,
+            ),
             const SizedBox(height: 30),
             const GoogleSignInButtonWidget(),
             const SizedBox(height: 50),
@@ -61,7 +65,7 @@ class RegisterSectionWidget extends StatelessWidget {
         const SizedBox(width: 5),
         TextButton(
           child: Text(
-            'Registrate',
+            l10n.register,
             style: TextStyles.tB4(context),
           ),
           onPressed: () => Navigator.pushNamed(

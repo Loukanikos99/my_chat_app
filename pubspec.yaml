@@ -8,28 +8,31 @@ environment:
 
 dependencies:
   bloc: ^8.0.3
+  chat_client_repository:
+    path: packages/chat_client_repository
+  chat_client_service:
+    path: packages/chat_client_service
+  cloud_firestore: ^3.2.1
+  dartz: ^0.10.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
   flutter_localizations:
     sdk: flutter
-  freezed: ^2.0.3+1
-  intl: ^0.17.0
 
-  chat_app_client:
-    path: packages/chat_app_client
   flutter_svg: ^1.1.1+1
   firebase_auth: ^3.4.1
   firebase_storage: ^10.3.1
   firebase_core: ^1.19.1
-  cloud_firestore: ^3.2.1
-  image_picker: ^0.8.5+3
   fluttertoast: ^8.0.9
-  get: ^4.6.5
-  hydrated_bloc: ^8.1.0
-  google_sign_in: ^5.3.3
-  path_provider: ^2.0.11
+  freezed: ^2.0.3+1
   font_awesome_flutter: ^10.1.0
+  get: ^4.6.5
+  google_sign_in: ^5.3.3
+  image_picker: ^0.8.5+3
+  intl: ^0.17.0
+  hydrated_bloc: ^8.1.0
+  path_provider: ^2.0.11
 
 dev_dependencies:
   bloc_test: ^9.0.3

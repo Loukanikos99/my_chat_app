@@ -1,5 +1,4 @@
-import 'package:chat_app_client/constants/firestore_constants.dart';
-import 'package:chat_app_client/models/chat_messaging_model.dart';
+import 'package:chat_client_repository/models/chat_messaging_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +8,7 @@ import 'package:my_chat_app/chat/room_bloc/room_state.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/body_room_screen_widget.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/message_input_widget.dart';
 import 'package:my_chat_app/chat/widgets/room_widgets/user_image_widget.dart';
+import 'package:my_chat_app/l10n/l10n.dart';
 
 class RoomScreen extends StatefulWidget {
   const RoomScreen({super.key});
@@ -54,11 +54,8 @@ class _RoomScreenState extends State<RoomScreen> {
     } else {
       context.read<RoomBloc>().add(
             RoomUpdateFirebaseDataEvent(
-              collectionPath: FirestoreConstants.pathUserCollection,
               docPath: currentUserId!,
-              dataUpdate: <String, dynamic>{
-                FirestoreConstants.chattingWith: null
-              },
+              dataUpdate: <String, dynamic>{'chattingWith': null},
             ),
           );
     }
@@ -111,6 +108,7 @@ class ViewLastMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocBuilder<RoomBloc, RoomState>(
       builder: (context, state) {
         return state.maybeWhen(
@@ -121,7 +119,7 @@ class ViewLastMessageWidget extends StatelessWidget {
                 return SizedBox(
                   height: 20,
                   child: Text(
-                    snapshot.data?.last.isRead == true ? 'Leído' : '',
+                    snapshot.data?.last.isRead == true ? l10n.read : '',
                   ),
                 );
               } else {

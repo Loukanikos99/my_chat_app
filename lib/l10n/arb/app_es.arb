@@ -16,5 +16,12 @@
     "password": "Contraseña",
     "thisFieldIsRequired":"Este campo es requerido",
     "userNotFound": "Usuario no encontrado",
-    "read": "Leído"
+    "read": "Leído",
+    "email": "Correo electronico",
+    "startANewChat": "Comenza un nuevo Chat",
+    "searchForAChat": "Buscar un chat",
+    "youHaveBeenSentAPicture": "Te han enviado una imagen",
+    "namelessUser" : "Usuario sin nombre",
+    "noMessagges": "Sin mensajes",
+    "writeSomething": "Escribe algo"
 }

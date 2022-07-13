@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:chat_app_client/src/chat_app_client.dart';
+import 'package:chat_client_service/chat_client_service.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('ChatAppClient', () {
+  group('ChatClientService', () {
     test('can be instantiated', () {
-      expect(ChatAppClient(), isNotNull);
+      expect(ChatClientService(), isNotNull);
     });
   });
 }

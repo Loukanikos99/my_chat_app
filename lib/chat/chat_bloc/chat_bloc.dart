@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:chat_app_client/chat_app_client.dart';
-import 'package:chat_app_client/models/user_model.dart';
+import 'package:chat_client_repository/chat_app_client.dart';
+import 'package:chat_client_service/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:my_chat_app/chat/chat_bloc/chat_event.dart';
@@ -9,13 +9,13 @@ import 'package:my_chat_app/chat/chat_bloc/chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatBloc({
-    required this.chatAppClient,
+    required this.chatClientRepo,
   }) : super(const ChatState.initial()) {
     on<ChatGetUsersEvent>(_onGetUsers);
     on<ChatGetUsersAlreadyWithChatEvent>(_onGetUsersAlreadyWithChat);
   }
 
-  final ChatAppClient chatAppClient;
+  final ChatClientRepository chatClientRepo;
 
   final currentUserId = auth.FirebaseAuth.instance.currentUser?.uid;
 
@@ -24,7 +24,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     Emitter<ChatState> emit,
   ) async {
     emit(const ChatState.loading());
-    final stream = chatAppClient.getUsers(
+    final stream = chatClientRepo.getUsers(
       'users',
       event.limit,
       event.textSearch,
@@ -40,7 +40,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ) async {
     emit(const ChatState.loading());
     try {
-      final stream = chatAppClient.getUsersAlreadyInChat(
+      final stream = chatClientRepo.getUsersAlreadyInChat(
         currentUserId!,
         event.limit,
         event.textSearch,

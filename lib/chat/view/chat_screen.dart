@@ -1,7 +1,7 @@
 import 'dart:async';
-
-import 'package:chat_app_client/chat_app_client.dart';
-import 'package:chat_app_client/models/user_model.dart';
+import 'package:chat_client_repository/chat_app_client.dart';
+import 'package:chat_client_service/chat_client_service.dart';
+import 'package:chat_client_service/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
@@ -12,6 +12,7 @@ import 'package:my_chat_app/chat/chat_bloc/chat_event.dart';
 import 'package:my_chat_app/chat/chat_bloc/chat_state.dart';
 import 'package:my_chat_app/chat/room_bloc/room_bloc.dart';
 import 'package:my_chat_app/chat/widgets/chat_screens_widget/widgets_chat_screens.dart';
+import 'package:my_chat_app/l10n/l10n.dart';
 import 'package:my_chat_app/resources/text_styles.dart';
 import 'package:my_chat_app/routes/route_list.dart';
 
@@ -42,14 +43,16 @@ class _ChatScreenState extends State<ChatScreen> {
 
   String _textSearch = '';
 
-  final ChatAppClient _chatAppClient = ChatAppClient();
-
   @override
   Widget build(BuildContext context) {
+    final _chatClientRepo = ChatClientRepository(
+      chatClientService: RepositoryProvider.of<ChatClientService>(context),
+    );
+    final l10n = context.l10n;
     return Scaffold(
       drawer: Drawer(
         child: TextButton(
-          child: const Text('Salir'),
+          child: Text(l10n.logout),
           onPressed: () =>
               context.read<AuthBloc>().add(const AuthSignOutEvent()),
         ),
@@ -100,7 +103,7 @@ class _ChatScreenState extends State<ChatScreen> {
               },
             ),
             const SizedBox(height: 20),
-            ChatsListChatScreenWidget(chatAppClient: _chatAppClient),
+            ChatsListChatScreenWidget(chatClientRepo: _chatClientRepo),
           ],
         ),
       ),
@@ -111,13 +114,14 @@ class _ChatScreenState extends State<ChatScreen> {
 class ChatsListChatScreenWidget extends StatelessWidget {
   const ChatsListChatScreenWidget({
     super.key,
-    required ChatAppClient chatAppClient,
-  }) : _chatAppClient = chatAppClient;
+    required ChatClientRepository chatClientRepo,
+  }) : _chatClientRepo = chatClientRepo;
 
-  final ChatAppClient _chatAppClient;
+  final ChatClientRepository _chatClientRepo;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocBuilder<ChatBloc, ChatState>(
       builder: (context, state) {
         return state.maybeWhen(
@@ -141,7 +145,7 @@ class ChatsListChatScreenWidget extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return BlocProvider.value(
                         value: RoomBloc(
-                          chatAppClient: _chatAppClient,
+                          chatClientRepo: _chatClientRepo,
                           otherUser: snapshot.data![index],
                         ),
                         child: ListTileChatScreenWidget(
@@ -153,9 +157,7 @@ class ChatsListChatScreenWidget extends StatelessWidget {
                         const Divider(),
                   );
                 } else {
-                  return const Center(
-                    child: Text('Comienze un nuevo chat!'),
-                  );
+                  return Center(child: Text(l10n.startANewChat));
                 }
               },
             ),

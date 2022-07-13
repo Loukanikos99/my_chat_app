@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:chat_app_client/chat_app_client.dart';
-import 'package:chat_app_client/models/chat_messaging_model.dart';
-import 'package:chat_app_client/models/user_model.dart';
+import 'package:chat_client_repository/chat_app_client.dart';
+import 'package:chat_client_repository/models/chat_messaging_model.dart';
+import 'package:chat_client_service/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,7 +14,7 @@ import 'package:my_chat_app/chat/room_bloc/room_state.dart';
 class RoomBloc extends Bloc<RoomEvent, RoomState> {
   RoomBloc({
     required this.otherUser,
-    required this.chatAppClient,
+    required this.chatClientRepo,
   }) : super(const RoomState.initial()) {
     on<RoomSendMessageEvent>(_onSendMessage);
     on<RoomGetChatMessagesEvent>(_onGetChatMessage);
@@ -23,7 +23,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     on<RoomGetImageEvent>(_onGetImage);
   }
 
-  final ChatAppClient chatAppClient;
+  final ChatClientRepository chatClientRepo;
 
   final User? otherUser;
 
@@ -41,8 +41,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     } else {
       groupChatId = '${otherUser?.id ?? ''} - $currentUserId';
     }
-    await chatAppClient.updateFirestoreData(
-      'users',
+    await chatClientRepo.updateFirestoreData(
       currentUserId!,
       <String, dynamic>{'chattingWith': otherUser?.id ?? ''},
     );
@@ -56,7 +55,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
       emit(const RoomState.loading());
       try {
         await _readLocal();
-        await chatAppClient.sendChatMessage(
+        await chatClientRepo.sendChatMessage(
           event.content,
           event.type,
           groupChatId,
@@ -67,7 +66,6 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
       } catch (e) {
         emit(const RoomState.failed());
       }
-      //TODO Manejar scrollController desde la UI.
     } else {
       await Fluttertoast.showToast(
         msg: 'Nothing to send',
@@ -82,7 +80,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     emit(const RoomState.loading());
     try {
       await _readLocal();
-      final stream = chatAppClient.getChatMessage(
+      final stream = chatClientRepo.getChatMessage(
         groupChatId,
         event.limit,
       );
@@ -98,8 +96,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     RoomUpdateFirebaseDataEvent event,
     Emitter<RoomState> emit,
   ) =>
-      chatAppClient.updateFirestoreData(
-        event.collectionPath,
+      chatClientRepo.updateFirestoreData(
         event.docPath,
         event.dataUpdate,
       );
@@ -108,7 +105,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     RoomUpdateUnreadMessageEvent event,
     Emitter<RoomState> emit,
   ) =>
-      chatAppClient.updateUnreadMessage(
+      chatClientRepo.updateUnreadMessage(
         groupChatId,
         event.docPath,
         event.chatMessage,

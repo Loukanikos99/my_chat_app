@@ -23,8 +23,7 @@ mixin _$RoomEvent {
     required TResult Function() getImage,
     required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
-    required TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)
+    required TResult Function(String docPath, Map<String, dynamic> dataUpdate)
         updateFirestoreData,
   }) =>
       throw _privateConstructorUsedError;
@@ -35,8 +34,7 @@ mixin _$RoomEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
   }) =>
       throw _privateConstructorUsedError;
@@ -47,8 +45,7 @@ mixin _$RoomEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
     required TResult orElse(),
   }) =>
@@ -181,8 +178,7 @@ class _$RoomSendMessageEvent implements RoomSendMessageEvent {
     required TResult Function() getImage,
     required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
-    required TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)
+    required TResult Function(String docPath, Map<String, dynamic> dataUpdate)
         updateFirestoreData,
   }) {
     return sendMessage(content, type);
@@ -196,8 +192,7 @@ class _$RoomSendMessageEvent implements RoomSendMessageEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
   }) {
     return sendMessage?.call(content, type);
@@ -211,8 +206,7 @@ class _$RoomSendMessageEvent implements RoomSendMessageEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
     required TResult orElse(),
   }) {
@@ -350,8 +344,7 @@ class _$RoomGetChatMessagesEvent implements RoomGetChatMessagesEvent {
     required TResult Function() getImage,
     required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
-    required TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)
+    required TResult Function(String docPath, Map<String, dynamic> dataUpdate)
         updateFirestoreData,
   }) {
     return getChatMessage(limit);
@@ -365,8 +358,7 @@ class _$RoomGetChatMessagesEvent implements RoomGetChatMessagesEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
   }) {
     return getChatMessage?.call(limit);
@@ -380,8 +372,7 @@ class _$RoomGetChatMessagesEvent implements RoomGetChatMessagesEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
     required TResult orElse(),
   }) {
@@ -490,8 +481,7 @@ class _$RoomGetImageEvent implements RoomGetImageEvent {
     required TResult Function() getImage,
     required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
-    required TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)
+    required TResult Function(String docPath, Map<String, dynamic> dataUpdate)
         updateFirestoreData,
   }) {
     return getImage();
@@ -505,8 +495,7 @@ class _$RoomGetImageEvent implements RoomGetImageEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
   }) {
     return getImage?.call();
@@ -520,8 +509,7 @@ class _$RoomGetImageEvent implements RoomGetImageEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
     required TResult orElse(),
   }) {
@@ -664,8 +652,7 @@ class _$RoomUpdateUnreadMessageEvent implements RoomUpdateUnreadMessageEvent {
     required TResult Function() getImage,
     required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
-    required TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)
+    required TResult Function(String docPath, Map<String, dynamic> dataUpdate)
         updateFirestoreData,
   }) {
     return updateUnreadMessage(docPath, chatMessage);
@@ -679,8 +666,7 @@ class _$RoomUpdateUnreadMessageEvent implements RoomUpdateUnreadMessageEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
   }) {
     return updateUnreadMessage?.call(docPath, chatMessage);
@@ -694,8 +680,7 @@ class _$RoomUpdateUnreadMessageEvent implements RoomUpdateUnreadMessageEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
     required TResult orElse(),
   }) {
@@ -766,8 +751,7 @@ abstract class _$$RoomUpdateFirebaseDataEventCopyWith<$Res> {
           _$RoomUpdateFirebaseDataEvent value,
           $Res Function(_$RoomUpdateFirebaseDataEvent) then) =
       __$$RoomUpdateFirebaseDataEventCopyWithImpl<$Res>;
-  $Res call(
-      {String collectionPath, String docPath, Map<String, dynamic> dataUpdate});
+  $Res call({String docPath, Map<String, dynamic> dataUpdate});
 }
 
 /// @nodoc
@@ -785,15 +769,10 @@ class __$$RoomUpdateFirebaseDataEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? collectionPath = freezed,
     Object? docPath = freezed,
     Object? dataUpdate = freezed,
   }) {
     return _then(_$RoomUpdateFirebaseDataEvent(
-      collectionPath: collectionPath == freezed
-          ? _value.collectionPath
-          : collectionPath // ignore: cast_nullable_to_non_nullable
-              as String,
       docPath: docPath == freezed
           ? _value.docPath
           : docPath // ignore: cast_nullable_to_non_nullable
@@ -810,13 +789,9 @@ class __$$RoomUpdateFirebaseDataEventCopyWithImpl<$Res>
 
 class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
   const _$RoomUpdateFirebaseDataEvent(
-      {required this.collectionPath,
-      required this.docPath,
-      required final Map<String, dynamic> dataUpdate})
+      {required this.docPath, required final Map<String, dynamic> dataUpdate})
       : _dataUpdate = dataUpdate;
 
-  @override
-  final String collectionPath;
   @override
   final String docPath;
   final Map<String, dynamic> _dataUpdate;
@@ -828,7 +803,7 @@ class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
 
   @override
   String toString() {
-    return 'RoomEvent.updateFirestoreData(collectionPath: $collectionPath, docPath: $docPath, dataUpdate: $dataUpdate)';
+    return 'RoomEvent.updateFirestoreData(docPath: $docPath, dataUpdate: $dataUpdate)';
   }
 
   @override
@@ -836,8 +811,6 @@ class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RoomUpdateFirebaseDataEvent &&
-            const DeepCollectionEquality()
-                .equals(other.collectionPath, collectionPath) &&
             const DeepCollectionEquality().equals(other.docPath, docPath) &&
             const DeepCollectionEquality()
                 .equals(other._dataUpdate, _dataUpdate));
@@ -846,7 +819,6 @@ class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(collectionPath),
       const DeepCollectionEquality().hash(docPath),
       const DeepCollectionEquality().hash(_dataUpdate));
 
@@ -864,11 +836,10 @@ class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
     required TResult Function() getImage,
     required TResult Function(String docPath, ChatMessage chatMessage)
         updateUnreadMessage,
-    required TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)
+    required TResult Function(String docPath, Map<String, dynamic> dataUpdate)
         updateFirestoreData,
   }) {
-    return updateFirestoreData(collectionPath, docPath, dataUpdate);
+    return updateFirestoreData(docPath, dataUpdate);
   }
 
   @override
@@ -879,11 +850,10 @@ class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
   }) {
-    return updateFirestoreData?.call(collectionPath, docPath, dataUpdate);
+    return updateFirestoreData?.call(docPath, dataUpdate);
   }
 
   @override
@@ -894,13 +864,12 @@ class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
     TResult Function()? getImage,
     TResult Function(String docPath, ChatMessage chatMessage)?
         updateUnreadMessage,
-    TResult Function(String collectionPath, String docPath,
-            Map<String, dynamic> dataUpdate)?
+    TResult Function(String docPath, Map<String, dynamic> dataUpdate)?
         updateFirestoreData,
     required TResult orElse(),
   }) {
     if (updateFirestoreData != null) {
-      return updateFirestoreData(collectionPath, docPath, dataUpdate);
+      return updateFirestoreData(docPath, dataUpdate);
     }
     return orElse();
   }
@@ -950,12 +919,10 @@ class _$RoomUpdateFirebaseDataEvent implements RoomUpdateFirebaseDataEvent {
 
 abstract class RoomUpdateFirebaseDataEvent implements RoomEvent {
   const factory RoomUpdateFirebaseDataEvent(
-          {required final String collectionPath,
-          required final String docPath,
+          {required final String docPath,
           required final Map<String, dynamic> dataUpdate}) =
       _$RoomUpdateFirebaseDataEvent;
 
-  String get collectionPath => throw _privateConstructorUsedError;
   String get docPath => throw _privateConstructorUsedError;
   Map<String, dynamic> get dataUpdate => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)

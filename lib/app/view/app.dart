@@ -1,4 +1,5 @@
-import 'package:chat_app_client/chat_app_client.dart';
+import 'package:chat_client_repository/chat_app_client.dart';
+import 'package:chat_client_service/chat_client_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,19 +13,32 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(
-        chatAppClient: ChatAppClient(),
-      ),
-      child: MaterialApp(
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
-        debugShowCheckedModeBanner: false,
-        initialRoute: RouteList.landing,
-        routes: routes,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => ChatClientService(),
+        ),
+        RepositoryProvider(
+          create: (context) => ChatClientRepository(
+            chatClientService:
+                RepositoryProvider.of<ChatClientService>(context),
+          ),
+        )
+      ],
+      child: BlocProvider(
+        create: (context) => AuthBloc(
+          chatClientRepo: RepositoryProvider.of<ChatClientRepository>(context),
+        ),
+        child: MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          debugShowCheckedModeBanner: false,
+          initialRoute: RouteList.landing,
+          routes: routes,
+        ),
       ),
     );
   }
