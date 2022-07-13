@@ -15,7 +15,7 @@ class NotReadMessagesWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '$timeAgo m ago',
+                timeAgo ?? '',
                 style: const TextStyle(
                   fontSize: 12,
                 ),

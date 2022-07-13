@@ -76,7 +76,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       final googleSignInAccount = await _googleSignIn.signIn();
 
       if (googleSignInAccount == null) {
-        await Fluttertoast.showToast(msg: 'Error 1');
+        emit(const AuthState.failed());
         return;
       }
 

@@ -31,6 +31,25 @@ class _ListTileChatScreenWidgetState extends State<ListTileChatScreenWidget> {
     super.initState();
   }
 
+  String _getMessageTimeAgoSended(String lastMessageTimeStamp) {
+    String? timeAgo;
+    final timeSended = DateTime.fromMillisecondsSinceEpoch(
+      int.parse(lastMessageTimeStamp),
+    );
+    final timeAgoValue = DateTime.now().difference(timeSended).inMinutes;
+    timeAgo = '${DateTime.now().difference(timeSended).inMinutes} m ago';
+    if (timeAgoValue > 60) {
+      timeAgo = '${timeAgoValue / 60} hs ago';
+    }
+    if (timeAgoValue > 1440 && timeAgoValue < 2880) {
+      timeAgo = 'Yesteday';
+    }
+    if (timeAgoValue > 2880) {
+      timeAgo = '${DateTime.now().difference(timeSended).inDays} days ago';
+    }
+    return timeAgo;
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = widget.user;
@@ -46,18 +65,11 @@ class _ListTileChatScreenWidgetState extends State<ListTileChatScreenWidget> {
             stream: messages,
             builder: (context, AsyncSnapshot<List<ChatMessage>> snapshot) {
               String? timeAgo;
-
               if (snapshot.data?.isNotEmpty ?? false) {
                 if (snapshot.data?.last.isRead == false &&
                     snapshot.data?.last.idTo == currentUserId) {
-                  final timeSended = DateTime.fromMillisecondsSinceEpoch(
-                    int.parse(snapshot.data?.last.timestamp as String),
-                  );
-
-                  timeAgo = DateTime.now()
-                      .difference(timeSended)
-                      .inMinutes
-                      .toString();
+                  timeAgo =
+                      _getMessageTimeAgoSended(snapshot.data!.last.timestamp!);
                 }
 
                 return GestureDetector(
@@ -110,7 +122,7 @@ class _ListTileChatScreenWidgetState extends State<ListTileChatScreenWidget> {
                           SizedBox(
                             height: 45,
                             width: 60,
-                            child: NotReadMessagesWidget(timeAgo?.toString()),
+                            child: NotReadMessagesWidget(timeAgo),
                           ),
                           SizedBox(width: screenSize.width * 0.05),
                         ],

@@ -89,7 +89,7 @@ class _RoomScreenState extends State<RoomScreen> {
           body: Column(
             children: [
               const BodyRoomScreenWidget(),
-              const SizedBox(height: 20, child: ViewLastMessageWidget()),
+              SizedBox(height: 20, child: ViewLastMessageWidget(currentUserId)),
               MessageInputWidget(
                 focusNode: focusNode,
               ),
@@ -102,9 +102,12 @@ class _RoomScreenState extends State<RoomScreen> {
 }
 
 class ViewLastMessageWidget extends StatelessWidget {
-  const ViewLastMessageWidget({
+  const ViewLastMessageWidget(
+    this.currentUserId, {
     super.key,
   });
+
+  final String? currentUserId;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +118,8 @@ class ViewLastMessageWidget extends StatelessWidget {
           messagesloaded: (messagges) => StreamBuilder(
             stream: messagges,
             builder: (context, AsyncSnapshot<List<ChatMessage>> snapshot) {
-              if (snapshot.data?.isNotEmpty ?? false) {
+              if (currentUserId == snapshot.data?.last.idTo &&
+                  (snapshot.data?.isNotEmpty ?? false)) {
                 return SizedBox(
                   height: 20,
                   child: Text(
